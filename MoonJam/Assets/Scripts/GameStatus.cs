@@ -7,7 +7,7 @@ public class GameStatus : MonoBehaviour {
     [SerializeField] private int initialScore = 0;
 
     // State
-    private int currentScore;
+    [SerializeField] private int currentScore;
 
     private void Awake() {
         if (!this.isOnlyGameStatusInstance()) {
