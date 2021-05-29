@@ -3,10 +3,10 @@ using System.Collections.Generic;
 using UnityEngine.Events;
 using UnityEngine;
 
-[System.Serializable]
 public class MusicTimingManager : MonoBehaviour
 {
     public int beatsPerMinute = 128;
+    public GameObject musicObjectPrefab;
     public List<MusicCommand> musicCommands = new List<MusicCommand>();
 
     static MusicTimingManager mInstance = null;
