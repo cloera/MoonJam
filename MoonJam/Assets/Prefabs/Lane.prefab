@@ -10,7 +10,6 @@ GameObject:
   m_Component:
   - component: {fileID: 3226164608381440763}
   - component: {fileID: 32025855926162809}
-  - component: {fileID: 4886890675703005351}
   m_Layer: 8
   m_Name: Lane
   m_TagString: Untagged
@@ -27,7 +26,7 @@ Transform:
   m_GameObject: {fileID: 1846048917318628976}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: -1.5927823, y: 1.3038986, z: -5.0012927}
-  m_LocalScale: {x: 24, y: 3, z: 1}
+  m_LocalScale: {x: 32, y: 3, z: 1}
   m_Children:
   - {fileID: 2327777890078422490}
   m_Father: {fileID: 0}
@@ -59,18 +58,6 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 1, y: 1}
   m_EdgeRadius: 0
---- !u!114 &4886890675703005351
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1846048917318628976}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2d33d9e0528755b4bae0d7daddddcb5b, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1001 &2543893039014435274
 PrefabInstance:
   m_ObjectHideFlags: 0
