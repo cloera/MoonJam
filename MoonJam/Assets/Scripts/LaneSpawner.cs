@@ -11,9 +11,18 @@ public class LaneSpawner : MonoBehaviour {
 
     private float currentTime = 0;
     private float zeroSeconds = 0;
+    private Vector3 defaultPosition = new Vector3(0, 0, 0);
 
     // Start is called before the first frame update
     IEnumerator Start() {
+        foreach (GameObject lanePrefab in lanePrefabs) {
+            Instantiate(
+                lanePrefab,
+                lanePrefab.transform.position,
+                Quaternion.identity
+            );
+        }
+
         while (run && (currentTime != totalSeconds)) {
             yield return StartCoroutine(spawnAllLaneWaves());
             currentTime++;
