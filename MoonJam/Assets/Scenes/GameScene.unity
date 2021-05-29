@@ -161,7 +161,7 @@ Transform:
   - {fileID: 280511524}
   - {fileID: 1623768233}
   m_Father: {fileID: 0}
-  m_RootOrder: 3
+  m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &338245048
 MonoBehaviour:
@@ -193,6 +193,52 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 3522856347996081857, guid: 275041a57d54b7a488e9b53a67b0b330, type: 3}
   m_PrefabInstance: {fileID: 3522856348999291634}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &1181106711
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1181106713}
+  - component: {fileID: 1181106712}
+  m_Layer: 0
+  m_Name: GameManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &1181106712
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1181106711}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a8472b399709e8c47bae7462ca8cba3b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  beatsPerMinute: 128
+  musicObjectPrefab: {fileID: 0}
+  musicCommands: []
+--- !u!4 &1181106713
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1181106711}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -0.060273122, y: 1.1546721, z: 0.12030029}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 3
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!4 &1623768233 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 463894111461400090, guid: 3b33448bf39e14046937be38b03f69ed, type: 3}
@@ -210,6 +256,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 338245047}
     m_Modifications:
+    - target: {fileID: 463894111461400088, guid: 3b33448bf39e14046937be38b03f69ed, type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 463894111461400090, guid: 3b33448bf39e14046937be38b03f69ed, type: 3}
       propertyPath: m_RootOrder
       value: 3
@@ -319,6 +369,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 4972484151849262194, guid: 007eb541255895b47b4723d88297f5a7, type: 3}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 5435967334983627054, guid: 007eb541255895b47b4723d88297f5a7, type: 3}
       propertyPath: m_Name
       value: MoonMoonPlayer
@@ -374,6 +428,10 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1680217950262697937, guid: 60a49ee0f3c650f4aa989b54dfc92015, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1680217950262697939, guid: 60a49ee0f3c650f4aa989b54dfc92015, type: 3}
+      propertyPath: m_Enabled
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 1680217950262697942, guid: 60a49ee0f3c650f4aa989b54dfc92015, type: 3}
@@ -494,6 +552,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 3522856347996081863, guid: 275041a57d54b7a488e9b53a67b0b330, type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 275041a57d54b7a488e9b53a67b0b330, type: 3}
 --- !u!1001 &3800239199989895274
@@ -564,6 +626,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 338245047}
     m_Modifications:
+    - target: {fileID: 9182322111009997909, guid: 9747cbc2f28f8e64c885d21033a13d76, type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 9182322111009997910, guid: 9747cbc2f28f8e64c885d21033a13d76, type: 3}
       propertyPath: m_Name
       value: Second Lane
