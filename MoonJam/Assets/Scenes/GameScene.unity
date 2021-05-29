@@ -216,6 +216,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1703283157}
   - component: {fileID: 1703283156}
+  - component: {fileID: 1703283158}
   m_Layer: 0
   m_Name: TimingObject
   m_TagString: Untagged
@@ -236,6 +237,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   beatsPerMinute: 128
+  musicCommands: []
 --- !u!4 &1703283157
 Transform:
   m_ObjectHideFlags: 0
@@ -250,3 +252,17 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1703283158
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1703283155}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f0a950a77fdbb7f4b8bb6050d40620f1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  musicClip: {fileID: 0}
+  note: 0
