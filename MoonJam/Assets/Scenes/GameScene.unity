@@ -175,29 +175,19 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a7fc95eb579f99b44a7b2a46283ba4c0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  topLaneWaveConfigs:
-  - {fileID: 11400000, guid: 9d434f0dd56f7404b8658e048a5dc1b8, type: 2}
-  - {fileID: 11400000, guid: c8387070b8f8fd841b4e1b9e24b9cb1b, type: 2}
-  - {fileID: 11400000, guid: 1e9cd28640f6ba042bfb40eb4bbb82c8, type: 2}
-  - {fileID: 11400000, guid: b853d60ec6c6dce4c862ff0d27be4e59, type: 2}
-  secondFromTopLaneWaveConfigs:
-  - {fileID: 11400000, guid: 40e47111c2534f5409fcf7ff4c5d8456, type: 2}
-  - {fileID: 11400000, guid: b9ef9bc6ae044d44cae887e6f33aba83, type: 2}
-  - {fileID: 11400000, guid: 57b495bdf33f6fa459ee38b0482ab625, type: 2}
-  - {fileID: 11400000, guid: 42494cca2382c3249ae4d908a90242d4, type: 2}
-  thirdFromTopLaneWaveConfigs:
-  - {fileID: 11400000, guid: c224fdd0f49831b48a07bf6ab875cf74, type: 2}
-  - {fileID: 11400000, guid: 2659a596519268e4697e137f6b5c4ccd, type: 2}
-  - {fileID: 11400000, guid: d6545ee07d159f54787e3390354beff2, type: 2}
-  - {fileID: 11400000, guid: 55b68f959bb4af7428afa6b6c9a92d45, type: 2}
-  bottomLaneWaveConfigs:
-  - {fileID: 11400000, guid: 3dad99cc3cea67b458054f00f4a75c7d, type: 2}
-  - {fileID: 11400000, guid: ae969b7cd29efa24a9d05b7d3c1f9b09, type: 2}
-  - {fileID: 11400000, guid: 230bd3f197019b24489e2a720a817c02, type: 2}
-  - {fileID: 11400000, guid: 3968450b4bc83e4488d541f66b191949, type: 2}
+  lanePrefabs:
+  - {fileID: 3522856347996081856, guid: 275041a57d54b7a488e9b53a67b0b330, type: 3}
+  - {fileID: 9182322111009997910, guid: 9747cbc2f28f8e64c885d21033a13d76, type: 3}
+  - {fileID: 1680217950262697942, guid: 60a49ee0f3c650f4aa989b54dfc92015, type: 3}
+  - {fileID: 463894111461400091, guid: 3b33448bf39e14046937be38b03f69ed, type: 3}
+  enemyPrefabs:
+  - {fileID: 6603520845149567225, guid: 037712cbf46038346b24c49b8aa00519, type: 3}
+  - {fileID: 6603520845149567225, guid: e9601f214fae6484da4d89781a31c5ae, type: 3}
+  - {fileID: 6603520845149567225, guid: 40ebb63adf705ec42a3deabff55f1fb4, type: 3}
+  - {fileID: 6603520845149567225, guid: b156bc5dfe139424c80d4f4a82ca2ac7, type: 3}
   totalSeconds: 30
-  delayBetweenEnemySpawns: 1
-  run: 0
+  delayBetweenEnemySpawns: 0.5
+  run: 1
 --- !u!4 &1037851699 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 3522856347996081857, guid: 275041a57d54b7a488e9b53a67b0b330, type: 3}
@@ -280,6 +270,10 @@ PrefabInstance:
     - target: {fileID: 1894727028, guid: 007eb541255895b47b4723d88297f5a7, type: 3}
       propertyPath: yPadding
       value: 4.2
+      objectReference: {fileID: 0}
+    - target: {fileID: 1894727028, guid: 007eb541255895b47b4723d88297f5a7, type: 3}
+      propertyPath: movementSpeed
+      value: 15
       objectReference: {fileID: 0}
     - target: {fileID: 45663585707377327, guid: 007eb541255895b47b4723d88297f5a7, type: 3}
       propertyPath: m_RootOrder
