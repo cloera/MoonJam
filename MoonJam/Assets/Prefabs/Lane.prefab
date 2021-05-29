@@ -10,6 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 3226164608381440763}
   - component: {fileID: 32025855926162809}
+  - component: {fileID: 4886890675703005351}
   m_Layer: 8
   m_Name: Lane
   m_TagString: Untagged
@@ -58,19 +59,18 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 1, y: 1}
   m_EdgeRadius: 0
---- !u!114 &823668033
+--- !u!114 &4886890675703005351
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4771381833843521606}
+  m_GameObject: {fileID: 1846048917318628976}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 892c2d2d21e5bcf4494717ec50c0d202, type: 3}
+  m_Script: {fileID: 11500000, guid: 2d33d9e0528755b4bae0d7daddddcb5b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  enemyPrefab: {fileID: 0}
 --- !u!1001 &2543893039014435274
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -128,11 +128,6 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 7731d2f7b63e6d74a950e5dd0ffea02d, type: 3}
---- !u!1 &4771381833843521606 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 7024176445017940364, guid: 7731d2f7b63e6d74a950e5dd0ffea02d, type: 3}
-  m_PrefabInstance: {fileID: 2543893039014435274}
-  m_PrefabAsset: {fileID: 0}
 --- !u!4 &2327777890078422490 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 216265784382106640, guid: 7731d2f7b63e6d74a950e5dd0ffea02d, type: 3}

@@ -6,10 +6,10 @@ public class Enemy : MonoBehaviour {
     [Header("Enemy Configs")]
     [SerializeField] private float health = 100f;
 
-    [Header("Projectile Configs")]
+    [Header("Projectile Configs (Optional)")]
     [SerializeField] private GameObject projectile;
-    [SerializeField] private float projectileSpeed = 1f;
-    [SerializeField] private float projectileBPM = 60f;
+    [SerializeField] private float projectileSpeed = 0;
+    [SerializeField] private float projectileBPM = 0;
 
     // Start is called before the first frame update
     void Start() {
