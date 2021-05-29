@@ -18,16 +18,16 @@ public class LaneSpawner : MonoBehaviour {
     [Header("General Configs")]
     [SerializeField] private float totalSeconds = 30f;
     [SerializeField] private float delayBetweenEnemySpawns = 1f;
-    [SerializeField] private bool loopWaves = false;
+    [SerializeField] private bool run = true;
 
     private float currentTime = 0;
 
     // Start is called before the first frame update
     IEnumerator Start() {
-        do {
+        while (run && (currentTime != totalSeconds)) {
             yield return StartCoroutine(spawnAllLaneWaves());
             currentTime++;
-        } while (currentTime != totalSeconds);
+        }
     }
 
     // Update is called once per frame
@@ -49,11 +49,7 @@ public class LaneSpawner : MonoBehaviour {
     }
 
     private IEnumerator spawnWave(WaveConfig waveConfig) {
-        GameObject tempEnemy = Instantiate(
-            waveConfig.getEnemyPrefab(),
-            waveConfig.getEnemySpawnPoint(),
-            Quaternion.identity
-        );
+        waveConfig.getLane().spawnEnemy(waveConfig.getEnemyPrefab());
 
         yield return new WaitForSeconds(delayBetweenEnemySpawns);
     }

@@ -12,5 +12,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1ed7aa8478fd4424ba0cef2f227f9c70, type: 3}
   m_Name: Bottom Lane Annoying Enemy
   m_EditorClassIdentifier: 
-  enemyPrefab: {fileID: 6603520845149567225, guid: 40ebb63adf705ec42a3deabff55f1fb4, type: 3}
+  enemyPrefab: {fileID: 6603520845149567225, guid: 037712cbf46038346b24c49b8aa00519, type: 3}
   lanePrefab: {fileID: 463894111461400091, guid: 3b33448bf39e14046937be38b03f69ed, type: 3}

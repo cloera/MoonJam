@@ -12,5 +12,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1ed7aa8478fd4424ba0cef2f227f9c70, type: 3}
   m_Name: Bottom Lane Slow Enemy
   m_EditorClassIdentifier: 
-  enemyPrefab: {fileID: 6603520845149567225, guid: 40ebb63adf705ec42a3deabff55f1fb4, type: 3}
+  enemyPrefab: {fileID: 6603520845149567225, guid: b156bc5dfe139424c80d4f4a82ca2ac7, type: 3}
   lanePrefab: {fileID: 463894111461400091, guid: 3b33448bf39e14046937be38b03f69ed, type: 3}
