@@ -3,24 +3,14 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class LaneSpawner : MonoBehaviour {
-    [Header("Top Lane WaveConfigs")]
-    [SerializeField] private List<WaveConfig> topLaneWaveConfigs = new List<WaveConfig>();
-
-    [Header("Second From Top Lane WaveConfigs")]
-    [SerializeField] private List<WaveConfig> secondFromTopLaneWaveConfigs = new List<WaveConfig>();
-
-    [Header("Third From Top Lane WaveConfigs")]
-    [SerializeField] private List<WaveConfig> thirdFromTopLaneWaveConfigs = new List<WaveConfig>();
-
-    [Header("Bottom Lane WaveConfigs")]
-    [SerializeField] private List<WaveConfig> bottomLaneWaveConfigs = new List<WaveConfig>();
-
-    [Header("General Configs")]
+    [SerializeField] private List<GameObject> lanePrefabs = new List<GameObject>();
+    [SerializeField] private List<GameObject> enemyPrefabs = new List<GameObject>();
     [SerializeField] private float totalSeconds = 30f;
     [SerializeField] private float delayBetweenEnemySpawns = 1f;
     [SerializeField] private bool run = true;
 
     private float currentTime = 0;
+    private float zeroSeconds = 0;
 
     // Start is called before the first frame update
     IEnumerator Start() {
@@ -35,28 +25,26 @@ public class LaneSpawner : MonoBehaviour {
     }
 
     private IEnumerator spawnAllLaneWaves() {
-        // Randomly sets the top, second from top, third from top, and bottom lane configs.
-        List<WaveConfig> allLaneWaveConfigs = new List<WaveConfig> {
-            getRandomLaneConfig(topLaneWaveConfigs),
-            getRandomLaneConfig(secondFromTopLaneWaveConfigs),
-            getRandomLaneConfig(thirdFromTopLaneWaveConfigs),
-            getRandomLaneConfig(bottomLaneWaveConfigs)
-        };
-
-        foreach (WaveConfig waveConfig in allLaneWaveConfigs) {
-            yield return StartCoroutine(spawnWave(waveConfig));
+        foreach (GameObject lanePrefab in lanePrefabs) {
+            yield return StartCoroutine(spawnWave(lanePrefab));
         }
     }
 
-    private IEnumerator spawnWave(WaveConfig waveConfig) {
-        waveConfig.getLane().spawnEnemy(waveConfig.getEnemyPrefab());
+    private IEnumerator spawnWave(GameObject lanePrefab) {
+        Lane lane = lanePrefab.GetComponent<Lane>();
 
-        yield return new WaitForSeconds(delayBetweenEnemySpawns);
+        if (lane != null) {
+            lane.spawnEnemy(getRandomEnemy());
+
+            yield return new WaitForSeconds(delayBetweenEnemySpawns);
+        }
+
+        yield return new WaitForSeconds(zeroSeconds);
     }
 
-    private WaveConfig getRandomLaneConfig(List<WaveConfig> laneWaveConfigs) {
-        int randomIndex = Random.Range(0, laneWaveConfigs.Count);
+    private GameObject getRandomEnemy() {
+        int randomIndex = Random.Range(0, enemyPrefabs.Count);
 
-        return laneWaveConfigs[randomIndex];
+        return enemyPrefabs[randomIndex];
     }
 }
