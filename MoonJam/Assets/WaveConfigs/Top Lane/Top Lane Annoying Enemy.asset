@@ -1,0 +1,16 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1ed7aa8478fd4424ba0cef2f227f9c70, type: 3}
+  m_Name: Top Lane Annoying Enemy
+  m_EditorClassIdentifier: 
+  enemyPrefab: {fileID: 6603520845149567225, guid: 037712cbf46038346b24c49b8aa00519, type: 3}
+  lanePrefab: {fileID: 3522856347996081856, guid: 275041a57d54b7a488e9b53a67b0b330, type: 3}

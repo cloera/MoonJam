@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -13,16 +14,27 @@ public class Player : MonoBehaviour {
     private float maxXPosition;
     private float minYPosition;
     private float maxYPosition;
+    private SpriteRenderer spriteRenderer;
 
 
     // Start is called before the first frame update
     void Start() {
+        spriteRenderer = GetComponent<SpriteRenderer>();
+
         setupMoveBoundaries();
     }
 
     // Update is called once per frame
     void Update() {
         move();
+    }
+
+    private void OnTriggerEnter2D(Collider2D other) {
+        DamageDealer damageDealer = other.gameObject.GetComponent<DamageDealer>();
+
+        if (damageDealer != null) {
+            processHit(damageDealer);
+        }
     }
 
     private void move() {
@@ -36,6 +48,14 @@ public class Player : MonoBehaviour {
         Vector2 destination = new Vector2(xDestination, yDestination);
 
         transform.position = destination;
+    }
+
+    // TODO: Play SFX and go to game over scene.
+    private void processHit(DamageDealer damageDealer) {
+        this.enabled = false;
+        spriteRenderer.enabled = false;
+
+        Destroy(gameObject);
     }
 
     private void setupMoveBoundaries() {
