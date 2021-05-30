@@ -34,10 +34,6 @@ public class BackgroundScroller : MonoBehaviour {
     void Update() {
         currentTime += Time.deltaTime;
 
-        Debug.Log(string.Format("Current Time: {0:F}", currentTime));
-        Debug.Log(string.Format("nextTransitionTime: {0:F}", nextTransitionTime));
-        Debug.Log(string.Format("nextTransitionHeight: {0:F}", nextTransitionHeight));
-
         transitioning = shouldStartBackgroundTransition();
 
         if (transitioning) {
