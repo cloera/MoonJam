@@ -29,7 +29,6 @@ public class MusicCommand : MonoBehaviour
 
         Lane randomLane = randomLanePrefab.GetComponent<Lane>();
 
-        // Debug.Log("Got random lane " + randomLanePrefab.name);
         randomLane.spawnEnemy(enemyPrefab);
     }
 
