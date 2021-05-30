@@ -11,7 +11,9 @@ GameObject:
   - component: {fileID: 45663585707377327}
   - component: {fileID: 4972484151849262194}
   - component: {fileID: 7432101790775602729}
+  - component: {fileID: 7983591152854978261}
   - component: {fileID: 1894727028}
+  - component: {fileID: 7544737716908900081}
   m_Layer: 6
   m_Name: MoonMoonPlayer
   m_TagString: Untagged
@@ -28,7 +30,7 @@ Transform:
   m_GameObject: {fileID: 5435967334983627054}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: -9, y: 0, z: 0}
-  m_LocalScale: {x: 2, y: 2, z: 1}
+  m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
@@ -73,7 +75,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 21300000, guid: 4b324de8575437342bc50efaac734d40, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 1c8ba712a5d5c2646842c9cbde27613d, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -91,6 +93,32 @@ BoxCollider2D:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5435967334983627054}
+  m_Enabled: 0
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: -0.04606247, y: 0.09539127}
+  m_SpriteTilingProperty:
+    border: {x: 0, y: 0, z: 0, w: 0}
+    pivot: {x: 0.5, y: 0.5}
+    oldSize: {x: 3.6849315, y: 2.9972603}
+    newSize: {x: 1, y: 1}
+    adaptiveTilingThreshold: 0.5
+    drawMode: 0
+    adaptiveTiling: 0
+  m_AutoTiling: 0
+  serializedVersion: 2
+  m_Size: {x: 3.7206192, y: 2.9179573}
+  m_EdgeRadius: 0
+--- !u!60 &7983591152854978261
+PolygonCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5435967334983627054}
   m_Enabled: 1
   m_Density: 1
   m_Material: {fileID: 0}
@@ -101,15 +129,45 @@ BoxCollider2D:
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 1.12, y: 1.12}
+    oldSize: {x: 3.6849315, y: 2.9972603}
     newSize: {x: 1, y: 1}
     adaptiveTilingThreshold: 0.5
     drawMode: 0
     adaptiveTiling: 0
   m_AutoTiling: 0
-  serializedVersion: 2
-  m_Size: {x: 1.12, y: 1.12}
-  m_EdgeRadius: 0
+  m_Points:
+    m_Paths:
+    - - {x: 1.7471857, y: 0.95267916}
+      - {x: 1.4328642, y: 1.252234}
+      - {x: 1.2751379, y: 1.3023858}
+      - {x: 1.0687408, y: 1.3440695}
+      - {x: 0.636405, y: 1.1707458}
+      - {x: 0.32831097, y: 1.3225532}
+      - {x: 0.05591297, y: 1.4934163}
+      - {x: -0.35894394, y: 1.4147258}
+      - {x: -0.70333576, y: 1.1779904}
+      - {x: -1.1270266, y: 1.3062701}
+      - {x: -1.3784866, y: 1.2617664}
+      - {x: -1.5997925, y: 1.1160045}
+      - {x: -1.7593622, y: 1.091219}
+      - {x: -1.8530807, y: 1.1925826}
+      - {x: -1.8119354, y: 1.020843}
+      - {x: -1.7323036, y: 0.8406205}
+      - {x: -1.7869644, y: 0.7447915}
+      - {x: -1.7498264, y: 0.4563036}
+      - {x: -1.5591259, y: -0.054255486}
+      - {x: -1.3858366, y: 0.05434847}
+      - {x: -1.3649521, y: -0.24033499}
+      - {x: -1.1573076, y: -0.50670385}
+      - {x: -0.891552, y: -0.7298703}
+      - {x: -1.0100651, y: -1.1324272}
+      - {x: -0.9398565, y: -1.2504773}
+      - {x: -0.5287398, y: -1.3208525}
+      - {x: -0.08380175, y: -1.1467212}
+      - {x: 0.36450958, y: -1.2636604}
+      - {x: 1.633543, y: -1.2393899}
+      - {x: 1.7145896, y: -1.1269146}
+      - {x: 1.6958919, y: 0.27464032}
 --- !u!114 &1894727028
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -123,5 +181,25 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   movementSpeed: 15
-  xPadding: 1.2
-  yPadding: 4.2
+  xPadding: 2
+  yPadding: 1.5
+  minXPosition: -16
+  maxXPosition: 16
+  minYPosition: -9
+  maxYPosition: 3
+--- !u!114 &7544737716908900081
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5435967334983627054}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 49a011bc73e9b0e41a405b3155d9c824, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  framesPerSecond: 15
+  spriteAnimations:
+  - {fileID: 21300000, guid: 1c8ba712a5d5c2646842c9cbde27613d, type: 3}
+  - {fileID: 21300000, guid: 42381eef434a76d42a94ae6b313f761f, type: 3}
