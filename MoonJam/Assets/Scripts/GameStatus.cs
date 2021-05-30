@@ -80,6 +80,12 @@ public class GameStatus : MonoBehaviour {
         return allowedNotesForTransition.Contains(note);
     }
 
+    public void resetGame() {
+        gameObject.SetActive(false);
+
+        Destroy(gameObject);
+    }
+
     private bool isOnlyGameStatusInstance() {
         int numberOfGameStatusInstances = FindObjectsOfType<GameStatus>().Length;
 
