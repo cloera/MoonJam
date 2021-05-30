@@ -14,11 +14,13 @@ public class Player : MonoBehaviour {
     private float maxXPosition;
     private float minYPosition;
     private float maxYPosition;
+    private SceneLoader sceneLoader;
     private SpriteRenderer spriteRenderer;
 
 
     // Start is called before the first frame update
     void Start() {
+        sceneLoader = FindObjectOfType<SceneLoader>();
         spriteRenderer = GetComponent<SpriteRenderer>();
 
         setupMoveBoundaries();
@@ -56,6 +58,8 @@ public class Player : MonoBehaviour {
         spriteRenderer.enabled = false;
 
         Destroy(gameObject);
+
+        sceneLoader.loadStartMenu();
     }
 
     private void setupMoveBoundaries() {
@@ -72,8 +76,8 @@ public class Player : MonoBehaviour {
     }
 
     private Vector2 getMovementDirectionInput() {
-        float xInput = Input.GetAxis("Horizontal") * movementSpeed * Time.deltaTime;;
-        float yInput = Input.GetAxis("Vertical") * movementSpeed * Time.deltaTime;
+        float xInput = Input.GetAxisRaw("Horizontal") * movementSpeed * Time.deltaTime;;
+        float yInput = Input.GetAxisRaw("Vertical") * movementSpeed * Time.deltaTime;
 
         return new Vector2(xInput, yInput);
     }
