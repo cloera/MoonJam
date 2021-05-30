@@ -8,6 +8,7 @@ public class GameStatus : MonoBehaviour {
 
     [Header("Background Transition Configs")]
     [SerializeField] private float transitionSpeed = 0.2f;
+    [SerializeField] private float spawningTransitionInterval = 2f;
     [SerializeField] private List<float> transitionTimesInSeconds = new List<float>();
 
     // State
@@ -56,6 +57,10 @@ public class GameStatus : MonoBehaviour {
 
     public float getTransitionSpeed() {
         return transitionSpeed;
+    }
+
+    public float getSpawningTransitionInterval() {
+        return spawningTransitionInterval;
     }
 
     public void setupForNextTransitionBackground() {

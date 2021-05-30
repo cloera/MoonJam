@@ -22,6 +22,8 @@ public class MusicTimingManager : MonoBehaviour
     private int barCount;
     private static MusicTimingManager mInstance = null;
     private AudioSource musicPlayer;
+    private GameStatus gameStatus;
+    private float oneSecond = 1f;
 
     private void Awake()
     {
@@ -44,6 +46,7 @@ public class MusicTimingManager : MonoBehaviour
         barLength = beatLength * 4.0f;
         barCount = 0;
         musicPlayer = gameObject.GetComponent<AudioSource>();
+        gameStatus = FindObjectOfType<GameStatus>();
 
         foreach(GameObject musicCommandPrefab in musicCommandPrefabs)
         {
@@ -62,9 +65,13 @@ public class MusicTimingManager : MonoBehaviour
     {
         while (true)
         {
-            yield return new WaitForSeconds(time);
+            if (gameStatus.shouldTransitionBackground()) {
+                yield return new WaitForSeconds(gameStatus.getSpawningTransitionInterval());
+            } else {
+                musicCommand.Execute(lanePrefabs);
 
-            musicCommand.Execute(lanePrefabs);
+                yield return new WaitForSeconds(time);
+            }
 
             playMusic();
         }
