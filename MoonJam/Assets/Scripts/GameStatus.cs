@@ -1,15 +1,20 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using NoteType;
 
 public class GameStatus : MonoBehaviour {
     [Header("Game Configs")]
     [SerializeField] private int initialScore = 0;
 
+    [Header("Note Types")]
+    [SerializeField] private List<Note> noteTypes = new List<Note>();
+
     [Header("Background Transition Configs")]
     [SerializeField] private float transitionSpeed = 0.2f;
     [SerializeField] private float spawningTransitionInterval = 2f;
     [SerializeField] private List<float> transitionTimesInSeconds = new List<float>();
+
 
     // State
     private int currentScore;
@@ -17,6 +22,7 @@ public class GameStatus : MonoBehaviour {
     private bool transitionBackground = false;
     private int currentTransitionIndex;
     private float nextTransitionTime;
+    private HashSet<Note> allowedNotesForTransition = new HashSet<Note>();
 
     private void Awake() {
         if (!this.isOnlyGameStatusInstance()) {
@@ -34,6 +40,7 @@ public class GameStatus : MonoBehaviour {
         currentTime = 0;
         currentTransitionIndex = 0;
         nextTransitionTime = getNextTransitionTime(currentTransitionIndex);
+        allowedNotesForTransition = getAllowedNotesForTransition();
     }
 
     // Update is called once per frame
@@ -66,6 +73,11 @@ public class GameStatus : MonoBehaviour {
     public void setupForNextTransitionBackground() {
         currentTransitionIndex += 1;
         nextTransitionTime = getNextTransitionTime(currentTransitionIndex);
+        allowedNotesForTransition = getAllowedNotesForTransition();
+    }
+
+    public bool noteIsAllowed(Note note) {
+        return allowedNotesForTransition.Contains(note);
     }
 
     private bool isOnlyGameStatusInstance() {
@@ -85,5 +97,15 @@ public class GameStatus : MonoBehaviour {
         }
 
         return transitionTimesInSeconds[index];
+    }
+
+    private HashSet<Note> getAllowedNotesForTransition() {
+        HashSet<Note> allowedNotes = new HashSet<Note>();
+
+        for (int index = 0; index <= (currentTransitionIndex + 1); index++) {
+            allowedNotes.Add(noteTypes[index]);
+        }
+
+        return allowedNotes;
     }
 }

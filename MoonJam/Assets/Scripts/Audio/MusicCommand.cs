@@ -2,17 +2,10 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine.Events;
 using UnityEngine;
+using NoteType;
 
 public class MusicCommand : MonoBehaviour
 {
-    private enum Note
-    {
-        WHOLE,
-        HALF,
-        QUARTER,
-        EIGTH,
-    }
-
     // Config
     [SerializeField] private AudioClip musicClip;
     [SerializeField] private Note note;
@@ -55,6 +48,10 @@ public class MusicCommand : MonoBehaviour
         }
 
         return time;
+    }
+
+    public Note GetNote() {
+        return note;
     }
 
     private GameObject getRandomLanePrefab(List<GameObject> lanePrefabs)

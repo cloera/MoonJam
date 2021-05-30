@@ -96,6 +96,3 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   scrollSpeed: 0.1
   transitionSpeed: 0.1
-  transitionTimesInSeconds:
-  - 5
-  - 15

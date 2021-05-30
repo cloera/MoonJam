@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine.Events;
 using UnityEngine;
+using NoteType;
 
 public class MusicTimingManager : MonoBehaviour
 {
@@ -65,10 +66,21 @@ public class MusicTimingManager : MonoBehaviour
     {
         while (true)
         {
-            if (gameStatus.shouldTransitionBackground()) {
+            Note musicCommandNote = musicCommand.GetNote();
+
+            bool noteIsAllowed = gameStatus.noteIsAllowed(musicCommandNote);
+
+            bool transitioning = gameStatus.shouldTransitionBackground();
+
+            if (gameStatus.shouldTransitionBackground())
+            {
                 yield return new WaitForSeconds(gameStatus.getSpawningTransitionInterval());
-            } else {
-                musicCommand.Execute(lanePrefabs);
+            } else
+            {
+                if (noteIsAllowed)
+                {
+                    musicCommand.Execute(lanePrefabs);
+                }
 
                 yield return new WaitForSeconds(time);
             }
