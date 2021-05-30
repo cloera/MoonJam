@@ -5,7 +5,7 @@ using UnityEngine;
 
 public class MusicCommand : MonoBehaviour
 {
-    public enum Note
+    private enum Note
     {
         WHOLE,
         HALF,
@@ -13,15 +13,24 @@ public class MusicCommand : MonoBehaviour
         EIGTH,
     }
 
-    public AudioClip musicClip;
-    public Note note;
+    // Config
+    [SerializeField] private AudioClip musicClip;
+    [SerializeField] private Note note;
+    [SerializeField] private GameObject enemyPrefab = null;
 
-    public void Execute()
+    private float wholeNoteInterval = 1.0f;
+    private float halfNoteInterval = 0.5f;
+    private float quarterNoteInterval = 0.25f;
+    private float eighthNoteInterval = 0.125f;
+
+    public void Execute(List<GameObject> lanePrefabs)
     {
-        // Randomly select lane
-        // Tell lane to spawn enemy
-        // Play sound
-        Debug.Log(note);
+        GameObject randomLanePrefab = getRandomLanePrefab(lanePrefabs);
+
+        Lane randomLane = randomLanePrefab.GetComponent<Lane>();
+
+        // Debug.Log("Got random lane " + randomLanePrefab.name);
+        randomLane.spawnEnemy(enemyPrefab);
     }
 
     public float GetNoteFraction()
@@ -31,21 +40,28 @@ public class MusicCommand : MonoBehaviour
         switch(note)
         {
             case Note.WHOLE:
-                time = 1.0f;
+                time = wholeNoteInterval;
                 break;
             case Note.HALF:
-                time = 0.5f;
+                time = halfNoteInterval;
                 break;
             case Note.QUARTER:
-                time = 0.25f;
+                time = quarterNoteInterval;
                 break;
             case Note.EIGTH:
-                time = 0.17f;
+                time = eighthNoteInterval;
                 break;
             default:
                 break;
         }
 
         return time;
+    }
+
+    private GameObject getRandomLanePrefab(List<GameObject> lanePrefabs)
+    {
+        int randomIndex = Random.Range(0, lanePrefabs.Count);
+
+        return lanePrefabs[randomIndex];
     }
 }

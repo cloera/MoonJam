@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 2963092542754767065}
   - component: {fileID: 2963092542754767070}
   m_Layer: 0
-  m_Name: MusicObject
+  m_Name: Half Note Spawner
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -44,5 +44,5 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   musicClip: {fileID: 0}
-  note: 0
-  enemyPrefab: {fileID: 6603520845149567225, guid: 40ebb63adf705ec42a3deabff55f1fb4, type: 3}
+  note: 1
+  enemyPrefab: {fileID: 6603520845149567225, guid: e9601f214fae6484da4d89781a31c5ae, type: 3}

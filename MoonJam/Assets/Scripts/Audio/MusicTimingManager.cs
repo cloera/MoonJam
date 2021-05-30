@@ -5,16 +5,23 @@ using UnityEngine;
 
 public class MusicTimingManager : MonoBehaviour
 {
-    public int beatsPerMinute = 128;
-    public GameObject musicObjectPrefab;
-    public List<MusicCommand> musicCommands = new List<MusicCommand>();
+    // config
+    [SerializeField] public int beatsPerMinute = 128;
+    [SerializeField] private List<GameObject> lanePrefabs = new List<GameObject>();
+    [SerializeField] private List<GameObject> musicCommandPrefabs = new List<GameObject>();
+    [SerializeField] private float noteIntervalDurationMultiplier = 1f;
+    [SerializeField] private float musicDelay = 0.5f;
 
-    static MusicTimingManager mInstance = null;
+    // public GameObject musicObjectPrefab;
+    // public List<MusicCommand> musicCommands = new List<MusicCommand>();
 
+    // Cache
     private float beatsPerSecond;
     private float beatLength;
     private float barLength;
     private int barCount;
+    private static MusicTimingManager mInstance = null;
+    private AudioSource musicPlayer;
 
     private void Awake()
     {
@@ -36,24 +43,38 @@ public class MusicTimingManager : MonoBehaviour
         beatLength = 1.0f / beatsPerSecond;
         barLength = beatLength * 4.0f;
         barCount = 0;
+        musicPlayer = gameObject.GetComponent<AudioSource>();
 
-        foreach(MusicCommand command in musicCommands)
+        foreach(GameObject musicCommandPrefab in musicCommandPrefabs)
         {
-            float noteInSeconds = beatLength * command.GetNoteFraction();
-            StartCoroutine(ExecuteAfterTime(command, noteInSeconds));
+            MusicCommand musicCommand = musicCommandPrefab.GetComponent<MusicCommand>();
+
+            float noteInSeconds = beatLength * musicCommand.GetNoteFraction();
+
+            float intervalTime = noteInSeconds * noteIntervalDurationMultiplier;
+
+            Debug.Log(string.Format("Music Object : {0}, {1}, {2}", musicCommandPrefab.name, noteInSeconds, intervalTime));
+
+            StartCoroutine(ExecuteAfterTime(musicCommand, intervalTime));
         }
-        
+
     }
 
-    IEnumerator ExecuteAfterTime(MusicCommand command, float time)
+    IEnumerator ExecuteAfterTime(MusicCommand musicCommand, float time)
     {
         while (true)
         {
             yield return new WaitForSeconds(time);
 
-            command.Execute();
+            musicCommand.Execute(lanePrefabs);
+
+            playMusic();
         }
     }
 
-
+    private void playMusic() {
+        if (!musicPlayer.isPlaying) {
+            musicPlayer.PlayDelayed(musicDelay);
+        }
+    }
 }
