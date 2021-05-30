@@ -53,8 +53,6 @@ public class MusicTimingManager : MonoBehaviour
 
             float intervalTime = noteInSeconds * noteIntervalDurationMultiplier;
 
-            Debug.Log(string.Format("Music Object : {0}, {1}, {2}", musicCommandPrefab.name, noteInSeconds, intervalTime));
-
             StartCoroutine(ExecuteAfterTime(musicCommand, intervalTime));
         }
 
