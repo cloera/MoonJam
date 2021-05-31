@@ -7,6 +7,7 @@ public class SceneLoader : MonoBehaviour {
     // Configs
     [SerializeField] private float loadSceneDelayInSeconds = 0.5f;
     [SerializeField] private string startMenuSceneName = "Start Menu";
+    [SerializeField] private string gameSceneName = "GameScene";
 
     public void loadStartMenu() {
         GameStatus gameStatus = FindObjectOfType<GameStatus>();
@@ -16,6 +17,10 @@ public class SceneLoader : MonoBehaviour {
         }
 
         loadScene(startMenuSceneName);
+    }
+
+    public void loadGameScene() {
+        loadScene(gameSceneName);
     }
 
     public void loadNextScene() {
