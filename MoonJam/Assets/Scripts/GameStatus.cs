@@ -6,6 +6,7 @@ using NoteType;
 public class GameStatus : MonoBehaviour {
     [Header("Game Configs")]
     [SerializeField] private int initialScore = 0;
+    [SerializeField] private float startDelayInSeconds = 2f;
 
     [Header("Note Types")]
     [SerializeField] private List<Note> noteTypes = new List<Note>();
@@ -23,6 +24,7 @@ public class GameStatus : MonoBehaviour {
     private int currentTransitionIndex;
     private float nextTransitionTime;
     private HashSet<Note> allowedNotesForTransition = new HashSet<Note>();
+    private bool isDelayed = true;
 
     private void Awake() {
         if (!this.isOnlyGameStatusInstance()) {
@@ -41,6 +43,14 @@ public class GameStatus : MonoBehaviour {
         currentTransitionIndex = 0;
         nextTransitionTime = getNextTransitionTime(currentTransitionIndex);
         allowedNotesForTransition = getAllowedNotesForTransition();
+
+        StartCoroutine(DelayStart());
+    }
+
+    IEnumerator DelayStart() {
+        yield return new WaitForSeconds(startDelayInSeconds);
+
+        isDelayed = false;
     }
 
     // Update is called once per frame
@@ -84,6 +94,10 @@ public class GameStatus : MonoBehaviour {
         gameObject.SetActive(false);
 
         Destroy(gameObject);
+    }
+
+    public bool gameIsDelayed() {
+        return isDelayed;
     }
 
     private bool isOnlyGameStatusInstance() {

@@ -72,12 +72,14 @@ public class MusicTimingManager : MonoBehaviour
 
             bool transitioning = gameStatus.shouldTransitionBackground();
 
+            bool gameIsDelayed = gameStatus.gameIsDelayed();
+
             if (gameStatus.shouldTransitionBackground())
             {
                 yield return new WaitForSeconds(gameStatus.getSpawningTransitionInterval());
             } else
             {
-                if (noteIsAllowed)
+                if (noteIsAllowed && !gameIsDelayed)
                 {
                     musicCommand.Execute(lanePrefabs);
                 }
