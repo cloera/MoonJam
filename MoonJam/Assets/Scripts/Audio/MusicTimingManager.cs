@@ -21,7 +21,10 @@ public class MusicTimingManager : MonoBehaviour
     private static MusicTimingManager mInstance = null;
     private AudioSource musicPlayer;
     private GameStatus gameStatus;
+    private MIDIPlayer midiPlayer;
     //private float oneSecond = 1f;
+    public bool hasNoteEvent = false;
+    private Object noteEventLock = new Object();
 
     private void Awake()
     {
@@ -46,7 +49,7 @@ public class MusicTimingManager : MonoBehaviour
         musicPlayer = gameObject.GetComponent<AudioSource>();
         gameStatus = FindObjectOfType<GameStatus>();
 
-        foreach(GameObject musicCommandPrefab in musicCommandPrefabs)
+        foreach (GameObject musicCommandPrefab in musicCommandPrefabs)
         {
             MusicCommand musicCommand = musicCommandPrefab.GetComponent<MusicCommand>();
 
@@ -56,7 +59,18 @@ public class MusicTimingManager : MonoBehaviour
 
             StartCoroutine(ExecuteAfterTime(musicCommand, intervalTime));
         }
+
+        midiPlayer = this.gameObject.AddComponent<MIDIPlayer>();
+        midiPlayer.InitPlayer("Kick_2_Irrupt.mid");
+        MIDIPlayer.notePlaybackDelegate += noteEventOn;
+
         playMusic();
+    }
+
+    private void OnDisable()
+    {
+        StopMusic();
+        MIDIPlayer.notePlaybackDelegate -= noteEventOn;
     }
 
     IEnumerator ExecuteAfterTime(MusicCommand musicCommand, float time)
@@ -67,26 +81,54 @@ public class MusicTimingManager : MonoBehaviour
 
             bool noteIsAllowed = gameStatus.noteIsAllowed(musicCommandNote);
 
-            bool transitioning = gameStatus.shouldTransitionBackground();
-
             if (gameStatus.shouldTransitionBackground())
             {
                 yield return new WaitForSeconds(gameStatus.getSpawningTransitionInterval());
-            } else
+            }
+            else
             {
-                if (noteIsAllowed)
+                lock(noteEventLock)
                 {
-                    musicCommand.Execute();
+                    if (noteIsAllowed && hasNoteEvent)
+                    {
+                        musicCommand.Execute();
+                        noteEventOff();
+                    }
                 }
+                
 
                 yield return new WaitForSeconds(time);
-            }         
+            }
+            
         }
     }
 
-    private void playMusic() {
-        if (!musicPlayer.isPlaying) {
+    public void noteEventOn()
+    {
+        lock(noteEventLock)
+        {
+            this.hasNoteEvent = true;
+        }
+    }
+
+    public void noteEventOff()
+    {
+        this.hasNoteEvent = false;
+    }
+
+    private void playMusic() 
+    {
+        if (!musicPlayer.isPlaying)
+        {
             musicPlayer.PlayDelayed(musicDelay);
+        }
+    }
+
+    private void StopMusic()
+    {
+        if(musicPlayer.isPlaying)
+        {
+            musicPlayer.Stop();
         }
     }
 

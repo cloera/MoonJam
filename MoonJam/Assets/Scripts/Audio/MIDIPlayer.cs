@@ -1,24 +1,22 @@
+using System;
 using System.IO;
-using System.Collections;
-using System.Collections.Generic;
 using Melanchall.DryWetMidi.Core;
 using Melanchall.DryWetMidi.Devices;
-using Melanchall.DryWetMidi.Interaction;
-using Melanchall.DryWetMidi.Common;
-using Melanchall.DryWetMidi.Tools;
 using UnityEngine;
-using System;
+using NoteType;
+using System.Collections.Generic;
 
 public class MIDIPlayer : MonoBehaviour
 {
-    MidiFile midiFile;
-    Playback playback;
+    public delegate void OnNotePlayback();
+    public static event OnNotePlayback notePlaybackDelegate;
+    private MidiFile midiFile;
+    private Playback playback;
 
-    // Start is called before the first frame update
-    void Start()
+    public void InitPlayer(string midiFileName)
     {
         string midiFolderPath = Path.Combine("Assets", "Music", "MIDI");
-        string midiFilePath = Path.Combine(midiFolderPath, "Arp_Polymer.mid");
+        string midiFilePath = Path.Combine(midiFolderPath, midiFileName);
         midiFile = MidiFile.Read(midiFilePath);
 
         // Regular precision tick generator needed to prevent Unity from crashing
@@ -27,18 +25,34 @@ public class MIDIPlayer : MonoBehaviour
             CreateTickGeneratorCallback = () => new RegularPrecisionTickGenerator()
         });
         playback.NoteCallback += OnNoteCallback;
-        playback.Start();
+        Play();
     }
 
-    private void OnDestroy()
+    void OnDestroy()
     {
-        playback.Stop();
+        playback.NoteCallback -= OnNoteCallback;
+        Stop();
         playback.Dispose();
     }
 
+    public void Play()
+    {
+        playback.Start();
+    }
+
+    public void Stop()
+    {
+        playback.Stop();
+    }
+
+    public int i = 0;
     public NotePlaybackData OnNoteCallback(NotePlaybackData rawNoteData, long rawTime, long rawLength, TimeSpan playbackTime)
     {
-        Debug.Log("RawNote: " + rawNoteData.NoteNumber);
+        Debug.Log("note: " + rawNoteData.NoteNumber + "  " + i);
+        i++;
+
+        notePlaybackDelegate();
+
         return rawNoteData;
     }
 

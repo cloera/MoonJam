@@ -25,6 +25,11 @@ public class MusicCommand : MonoBehaviour
         randomLane.spawnEnemy(enemyPrefab);
     }
 
+    public GameObject GetEnemy()
+    {
+        return enemyPrefab;
+    }
+
     public float GetNoteFraction()
     {
         float time = 0.0f;
