@@ -46,3 +46,5 @@ MonoBehaviour:
   musicClip: {fileID: 0}
   note: 0
   enemyPrefab: {fileID: 6603520845149567225, guid: 037712cbf46038346b24c49b8aa00519, type: 3}
+  enemyPrefabs:
+  - {fileID: 6603520845149567225, guid: 037712cbf46038346b24c49b8aa00519, type: 3}
