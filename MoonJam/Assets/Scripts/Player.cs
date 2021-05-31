@@ -21,7 +21,7 @@ public class Player : MonoBehaviour {
     // Start is called before the first frame update
     void Start() {
         sceneLoader = FindObjectOfType<SceneLoader>();
-        spriteRenderer = GetComponent<SpriteRenderer>();
+        spriteRenderer = getSpriteRenderer();
 
         setupMoveBoundaries();
     }
@@ -75,5 +75,9 @@ public class Player : MonoBehaviour {
         float yInput = Input.GetAxisRaw("Vertical") * movementSpeed * Time.deltaTime;
 
         return new Vector2(xInput, yInput);
+    }
+
+    private SpriteRenderer getSpriteRenderer() {
+        return gameObject.transform.Find("SpriteHolder").GetComponent<SpriteRenderer>();
     }
 }
