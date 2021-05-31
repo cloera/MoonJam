@@ -46,6 +46,10 @@ public class SceneLoader : MonoBehaviour {
         return isOnMainGameScene || isOnBossScene;
     }
 
+    public bool isOnBossScene() {
+        return SceneManager.GetActiveScene().name.Equals(bossSceneName);
+    }
+
     private void loadScene(string sceneName) {
         StartCoroutine(loadSceneWithDelay(sceneName));
     }

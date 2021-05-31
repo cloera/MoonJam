@@ -45,6 +45,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   musicClip: {fileID: 0}
   note: 2
-  enemyPrefab: {fileID: 6603520845149567225, guid: 40ebb63adf705ec42a3deabff55f1fb4, type: 3}
   enemyPrefabs:
   - {fileID: 6603520845149567225, guid: 40ebb63adf705ec42a3deabff55f1fb4, type: 3}
+  bossProjectilePrefabs:
+  - {fileID: 2915886849180950908, guid: 89a304576ebd30d4da8bea391dce6234, type: 3}

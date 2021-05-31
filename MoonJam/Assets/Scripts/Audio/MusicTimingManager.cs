@@ -79,7 +79,7 @@ public class MusicTimingManager : MonoBehaviour
 
             if (!FindObjectOfType<SceneLoader>().isOnGameScene())
             {
-                yield return new WaitForSeconds(zeroSeconds);
+                yield return new WaitForSeconds(interval);
             }
             else if (gameStatus.shouldTransitionBackground())
             {

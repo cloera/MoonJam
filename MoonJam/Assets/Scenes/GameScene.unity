@@ -204,12 +204,20 @@ PrefabInstance:
       value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 2680837861829289919, guid: db3dabd0fd7c6e74c9c152304f913fe7, type: 3}
+      propertyPath: transitionTimesInSeconds.Array.size
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 2680837861829289919, guid: db3dabd0fd7c6e74c9c152304f913fe7, type: 3}
       propertyPath: transitionTimesInSeconds.Array.data[0]
-      value: 5
+      value: 84
       objectReference: {fileID: 0}
     - target: {fileID: 2680837861829289919, guid: db3dabd0fd7c6e74c9c152304f913fe7, type: 3}
       propertyPath: transitionTimesInSeconds.Array.data[1]
-      value: 5
+      value: 78
+      objectReference: {fileID: 0}
+    - target: {fileID: 2680837861829289919, guid: db3dabd0fd7c6e74c9c152304f913fe7, type: 3}
+      propertyPath: transitionTimesInSeconds.Array.data[2]
+      value: 85
       objectReference: {fileID: 0}
     - target: {fileID: 7696494362187319411, guid: db3dabd0fd7c6e74c9c152304f913fe7, type: 3}
       propertyPath: m_Name
@@ -473,6 +481,10 @@ PrefabInstance:
     - target: {fileID: 5435967334983627054, guid: 007eb541255895b47b4723d88297f5a7, type: 3}
       propertyPath: m_Name
       value: MoonMoonPlayer
+      objectReference: {fileID: 0}
+    - target: {fileID: 7432101790775602729, guid: 007eb541255895b47b4723d88297f5a7, type: 3}
+      propertyPath: m_Enabled
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 007eb541255895b47b4723d88297f5a7, type: 3}

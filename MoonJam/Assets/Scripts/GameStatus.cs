@@ -66,11 +66,14 @@ public class GameStatus : MonoBehaviour {
 
     // Update is called once per frame
     void Update() {
+        if (FindObjectOfType<SceneLoader>().isOnBossScene()) {
+            currentNoteIntervalDurationMultiplier = noteIntervalDurationMultiplier;
+        }
+
         if (FindObjectOfType<SceneLoader>().isOnGameScene()) {
             currentTime += Time.deltaTime;
 
-            bool nextTransitionIsLast =
-                (currentTransitionIndex + 1) == transitionTimesInSeconds.Count;
+            nextTransitionTime = getNextTransitionTime(currentTransitionIndex);
 
             transitionBackground = shouldStartBackgroundTransition();
 
@@ -125,14 +128,15 @@ public class GameStatus : MonoBehaviour {
     public void setupForNextTransitionBackground() {
         currentTime = 0;
         currentTransitionIndex += 1;
-        nextTransitionTime = getNextTransitionTime(currentTransitionIndex);
-        currentAllowedNodes += newNodesPerTransition;
-        allowedNotesForTransition = getAllowedNotesForTransition();
-        currentNoteIntervalDurationMultiplier += noteIncreasePerTransition;
 
         if (currentTransitionIndex == transitionTimesInSeconds.Count) {
             FindObjectOfType<SceneLoader>().loadNextScene();
         }
+
+        nextTransitionTime = getNextTransitionTime(currentTransitionIndex);
+        currentAllowedNodes += newNodesPerTransition;
+        allowedNotesForTransition = getAllowedNotesForTransition();
+        currentNoteIntervalDurationMultiplier += noteIncreasePerTransition;
     }
 
     private bool isOnlyGameStatusInstance() {

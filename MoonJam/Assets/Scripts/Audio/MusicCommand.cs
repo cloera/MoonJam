@@ -10,6 +10,7 @@ public class MusicCommand : MonoBehaviour
     [SerializeField] private AudioClip musicClip;
     [SerializeField] private Note note;
     [SerializeField] private List<GameObject> enemyPrefabs = null;
+    [SerializeField] private List<GameObject> bossProjectilePrefabs = null;
 
     private float wholeNoteInterval = 1.0f;
     private float halfNoteInterval = 0.5f;
@@ -22,7 +23,14 @@ public class MusicCommand : MonoBehaviour
 
         Lane randomLane = randomLanePrefab.GetComponent<Lane>();
 
-        randomLane.spawnEnemy(getRandomEnemyPrefab());
+        if (FindObjectOfType<SceneLoader>().isOnBossScene())
+        {
+            randomLane.spawnEnemy(getRandomProjectilePrefab());
+        }
+        else
+        {
+            randomLane.spawnEnemy(getRandomEnemyPrefab());
+        }
     }
 
     public float GetNoteFraction()
@@ -66,5 +74,12 @@ public class MusicCommand : MonoBehaviour
         int randomIndex = Random.Range(0, enemyPrefabs.Count);
 
         return enemyPrefabs[randomIndex];
+    }
+
+    private GameObject getRandomProjectilePrefab()
+    {
+        int randomIndex = Random.Range(0, bossProjectilePrefabs.Count);
+
+        return bossProjectilePrefabs[randomIndex];
     }
 }
