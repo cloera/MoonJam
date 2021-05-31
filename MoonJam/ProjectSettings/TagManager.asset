@@ -3,7 +3,8 @@
 --- !u!78 &1
 TagManager:
   serializedVersion: 2
-  tags: []
+  tags:
+  - Enemy
   layers:
   - Default
   - TransparentFX
@@ -11,17 +12,17 @@ TagManager:
   - 
   - Water
   - UI
-  - Player
+  - 
   - Enemy
   - Lane
   - Projectile
-  - 
-  - 
-  - 
-  - 
-  - 
-  - 
-  - 
+  - Lane 1
+  - Lane 2
+  - Lane 3
+  - Lane 4
+  - Road
+  - Background
+  - Player
   - 
   - 
   - 
@@ -40,4 +41,19 @@ TagManager:
   m_SortingLayers:
   - name: Default
     uniqueID: 0
+    locked: 0
+  - name: Player
+    uniqueID: 2580770691
+    locked: 0
+  - name: Lane 1
+    uniqueID: 3728905079
+    locked: 0
+  - name: Lane 2
+    uniqueID: 52358481
+    locked: 0
+  - name: Lane 3
+    uniqueID: 153338149
+    locked: 0
+  - name: Lane 4
+    uniqueID: 1766465839
     locked: 0

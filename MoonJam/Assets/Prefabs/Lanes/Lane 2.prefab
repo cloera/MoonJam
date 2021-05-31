@@ -12,7 +12,8 @@ GameObject:
   - component: {fileID: 9182322111009997908}
   - component: {fileID: 9182322111009997909}
   - component: {fileID: 8716835246942881783}
-  m_Layer: 8
+  - component: {fileID: 4025744978336835880}
+  m_Layer: 11
   m_Name: Lane 2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -27,7 +28,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 9182322111009997910}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 1.5, z: 0}
+  m_LocalPosition: {x: 0, y: -1.5, z: 0}
   m_LocalScale: {x: 32, y: 3, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
@@ -123,3 +124,14 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   spawner: {fileID: 6032372091771603189, guid: 8ad25e930bfe5104e8b56eaf0e0be03f, type: 3}
+--- !u!210 &4025744978336835880
+SortingGroup:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9182322111009997910}
+  m_Enabled: 1
+  m_SortingLayerID: 52358481
+  m_SortingLayer: 4
+  m_SortingOrder: 0

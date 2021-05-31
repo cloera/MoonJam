@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Rendering;
 
 public class Enemy : MonoBehaviour {
     [Header("Enemy Configs")]
@@ -15,15 +16,23 @@ public class Enemy : MonoBehaviour {
 
     // Cache
     private GameStatus gameStatus = null;
+    private SortingGroup sortingGroup = null;
 
     // Start is called before the first frame update
     void Start() {
         gameStatus = FindObjectOfType<GameStatus>();
+
+        sortingGroup = gameObject.GetComponent<SortingGroup>();
     }
 
     // Update is called once per frame
     void Update() {
         move();
+    }
+
+    public void setSortingGroup(SortingGroup sortingGroup) {
+        getSortingGroup().sortingLayerName = sortingGroup.sortingLayerName;
+        getSortingGroup().sortingOrder = sortingGroup.sortingOrder;
     }
 
     private void OnTriggerEnter2D(Collider2D other) {
@@ -40,5 +49,9 @@ public class Enemy : MonoBehaviour {
         Vector3 destination = transform.position - movement;
 
         transform.position = destination;
+    }
+
+    private SortingGroup getSortingGroup() {
+        return gameObject.GetComponent<SortingGroup>();
     }
 }

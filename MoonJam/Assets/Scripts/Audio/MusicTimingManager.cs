@@ -11,7 +11,7 @@ public class MusicTimingManager : MonoBehaviour
     [SerializeField] private List<GameObject> lanePrefabs = new List<GameObject>();
     [SerializeField] private List<GameObject> musicCommandPrefabs = new List<GameObject>();
     [SerializeField] private List<GameObject> midiPrefabs = new List<GameObject>();
-    [SerializeField] private float noteIntervalDurationMultiplier = 1f;
+    [SerializeField] private float noteIntervalDurationMultiplier = 16f;
     [SerializeField] private float musicDelay = 0.5f;
 
     // Cache
@@ -28,6 +28,9 @@ public class MusicTimingManager : MonoBehaviour
     private static LockState mainLockState2 = new LockState();
     private static LockState mainLockState3 = new LockState();
     private static LockState mainLockState4 = new LockState();
+
+    private float zeroSeconds = 0f;
+
 
     private void Awake()
     {
@@ -75,6 +78,7 @@ public class MusicTimingManager : MonoBehaviour
         }
 
         playMusic();
+        //StartCoroutine(playMusicOnGameScene());
     }
 
     private void OnDisable()
@@ -85,6 +89,15 @@ public class MusicTimingManager : MonoBehaviour
         MusicCommand.OnLockGetDelegate -= getLockState;
     }
 
+    IEnumerator PlayMusicOnGameScene()
+    {
+        while(true)
+        {
+            playMusic();
+            yield return null;
+        }
+    }
+
     IEnumerator ExecuteAfterTime(MusicCommand musicCommand)
     {
         while (true)
@@ -93,19 +106,35 @@ public class MusicTimingManager : MonoBehaviour
 
             bool noteIsAllowed = gameStatus.noteIsAllowed(musicCommandNote);
 
-            if (gameStatus.shouldTransitionBackground())
+            bool transitioning = gameStatus.shouldTransitionBackground();
+
+            bool gameIsDelayed = gameStatus.gameIsDelayed();
+
+            //float interval = time * gameStatus.getCurrentNoteIntervalDurationMultiplier();
+
+            if (!FindObjectOfType<SceneLoader>().isOnGameScene())
+            {
+                yield return new WaitForSeconds(zeroSeconds);
+            }
+            else if (gameStatus.shouldTransitionBackground())
             {
                 yield return new WaitForSeconds(gameStatus.getSpawningTransitionInterval());
             }
             else
             {
-                if (noteIsAllowed)
+                if (noteIsAllowed && !gameIsDelayed)
                 {
                     musicCommand.Execute();
                 }
                 yield return null;
+
+                //yield return new WaitForSeconds(interval);
             }
-            
+
+            if (FindObjectOfType<SceneLoader>().isOnGameScene())
+            {
+                playMusic();
+            }
         }
     }
 
@@ -133,7 +162,7 @@ public class MusicTimingManager : MonoBehaviour
     {
         if (!musicPlayer.isPlaying)
         {
-            musicPlayer.PlayDelayed(musicDelay);
+            musicPlayer.UnPause();
         }
     }
 

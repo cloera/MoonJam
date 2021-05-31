@@ -45,3 +45,4 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   loadSceneDelayInSeconds: 0.5
   startMenuSceneName: Start Menu
+  gameSceneName: GameScene

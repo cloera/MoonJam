@@ -7,6 +7,11 @@ public class SceneLoader : MonoBehaviour {
     // Configs
     [SerializeField] private float loadSceneDelayInSeconds = 0.5f;
     [SerializeField] private string startMenuSceneName = "Start Menu";
+    [SerializeField] private string gameSceneName = "GameScene";
+    [SerializeField] private string bossSceneName = "Boss Scene";
+
+    // Cache
+    private AudioSource musicPlayer;
 
     public void loadStartMenu() {
         GameStatus gameStatus = FindObjectOfType<GameStatus>();
@@ -18,12 +23,27 @@ public class SceneLoader : MonoBehaviour {
         loadScene(startMenuSceneName);
     }
 
+    public void loadGameScene() {
+        loadScene(gameSceneName);
+    }
+
     public void loadNextScene() {
         int currentSceneIndex = SceneManager.GetActiveScene().buildIndex;
 
         string nextSceneName = GetSceneNameFromBuildIndex(currentSceneIndex + 1);
 
         loadScene(nextSceneName);
+    }
+
+    public void quitGame() {
+        Application.Quit();
+    }
+
+    public bool isOnGameScene() {
+        bool isOnMainGameScene = SceneManager.GetActiveScene().name.Equals(gameSceneName);
+        bool isOnBossScene = SceneManager.GetActiveScene().name.Equals(bossSceneName);
+
+        return isOnMainGameScene || isOnBossScene;
     }
 
     private void loadScene(string sceneName) {

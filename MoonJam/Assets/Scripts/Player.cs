@@ -8,18 +8,20 @@ public class Player : MonoBehaviour {
     [SerializeField] private float movementSpeed = 1f;
     [SerializeField] float xPadding = 1f;
     [SerializeField] float yPadding = 1f;
+    [SerializeField] private float minXPosition;
+    [SerializeField] private float maxXPosition;
+    [SerializeField] private float minYPosition;
+    [SerializeField] private float maxYPosition;
 
     // Cache
-    private float minXPosition;
-    private float maxXPosition;
-    private float minYPosition;
-    private float maxYPosition;
+    private SceneLoader sceneLoader;
     private SpriteRenderer spriteRenderer;
 
 
     // Start is called before the first frame update
     void Start() {
-        spriteRenderer = GetComponent<SpriteRenderer>();
+        sceneLoader = FindObjectOfType<SceneLoader>();
+        spriteRenderer = getSpriteRenderer();
 
         setupMoveBoundaries();
     }
@@ -56,25 +58,26 @@ public class Player : MonoBehaviour {
         spriteRenderer.enabled = false;
 
         Destroy(gameObject);
+
+        sceneLoader.loadStartMenu();
     }
 
     private void setupMoveBoundaries() {
-        Camera gameCamera = Camera.main;
+        minXPosition = minXPosition + xPadding;
+        maxXPosition = maxXPosition - xPadding;
 
-        Vector3 minWorldPoint = gameCamera.ViewportToWorldPoint(new Vector3(0, 0, 0));
-        Vector3 maxWorldPoint = gameCamera.ViewportToWorldPoint(new Vector3(1, 1, 0));
-
-        minXPosition = minWorldPoint.x + xPadding;
-        maxXPosition = maxWorldPoint.x - xPadding;
-
-        minYPosition = minWorldPoint.y + yPadding ;
-        maxYPosition = maxWorldPoint.y - yPadding;
+        minYPosition = minYPosition + yPadding ;
+        maxYPosition = maxYPosition - yPadding;
     }
 
     private Vector2 getMovementDirectionInput() {
-        float xInput = Input.GetAxis("Horizontal") * movementSpeed * Time.deltaTime;;
-        float yInput = Input.GetAxis("Vertical") * movementSpeed * Time.deltaTime;
+        float xInput = Input.GetAxisRaw("Horizontal") * movementSpeed * Time.deltaTime;;
+        float yInput = Input.GetAxisRaw("Vertical") * movementSpeed * Time.deltaTime;
 
         return new Vector2(xInput, yInput);
+    }
+
+    private SpriteRenderer getSpriteRenderer() {
+        return gameObject.transform.Find("SpriteHolder").GetComponent<SpriteRenderer>();
     }
 }
