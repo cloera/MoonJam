@@ -35,6 +35,10 @@ public class SceneLoader : MonoBehaviour {
         Application.Quit();
     }
 
+    public bool isOnGameScene() {
+        return SceneManager.GetActiveScene().name.Equals(gameSceneName);
+    }
+
     private void loadScene(string sceneName) {
         StartCoroutine(loadSceneWithDelay(sceneName));
     }
