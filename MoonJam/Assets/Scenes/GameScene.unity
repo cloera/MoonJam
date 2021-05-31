@@ -139,12 +139,16 @@ PrefabInstance:
       value: 4
       objectReference: {fileID: 0}
     - target: {fileID: 6427257520224997586, guid: 9ba4d8326faf295468bc7864fdcb4314, type: 3}
+      propertyPath: m_LocalScale.y
+      value: 18
+      objectReference: {fileID: 0}
+    - target: {fileID: 6427257520224997586, guid: 9ba4d8326faf295468bc7864fdcb4314, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6427257520224997586, guid: 9ba4d8326faf295468bc7864fdcb4314, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -0.5
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6427257520224997586, guid: 9ba4d8326faf295468bc7864fdcb4314, type: 3}
       propertyPath: m_LocalPosition.z
@@ -193,7 +197,7 @@ PrefabInstance:
       objectReference: {fileID: 8300000, guid: a385d40e2a9c50341bbb058b8d5d8cf4, type: 3}
     - target: {fileID: 2680837861829289919, guid: db3dabd0fd7c6e74c9c152304f913fe7, type: 3}
       propertyPath: noteIncreasePerTransition
-      value: 12
+      value: 20
       objectReference: {fileID: 0}
     - target: {fileID: 2680837861829289919, guid: db3dabd0fd7c6e74c9c152304f913fe7, type: 3}
       propertyPath: transitionTimesInSeconds.Array.data[0]
@@ -343,7 +347,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 45663585707377327, guid: 007eb541255895b47b4723d88297f5a7, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -6.5
+      value: -0.25
       objectReference: {fileID: 0}
     - target: {fileID: 45663585707377327, guid: 007eb541255895b47b4723d88297f5a7, type: 3}
       propertyPath: m_LocalPosition.z
