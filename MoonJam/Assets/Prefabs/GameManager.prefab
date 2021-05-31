@@ -71,6 +71,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   initialScore: 0
+  startDelayInSeconds: 2
+  noteIntervalDurationMultiplier: 4
+  noteIncreasePerTransition: 20
+  newNodesPerTransition: 2
   noteTypes: 00000000010000000200000003000000
   transitionSpeed: 0.2
   spawningTransitionInterval: 4
@@ -86,7 +90,7 @@ AudioSource:
   m_Enabled: 1
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 0}
-  m_audioClip: {fileID: 8300000, guid: 9d36bde81a63bb94eb68aa9dbe3e42e0, type: 3}
+  m_audioClip: {fileID: 8300000, guid: a385d40e2a9c50341bbb058b8d5d8cf4, type: 3}
   m_PlayOnAwake: 1
   m_Volume: 1
   m_Pitch: 1
