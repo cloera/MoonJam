@@ -7,8 +7,11 @@ public class GameStatus : MonoBehaviour {
     [Header("Game Configs")]
     [SerializeField] private int initialScore = 0;
     [SerializeField] private float startDelayInSeconds = 2f;
+    [SerializeField] private float noteIntervalDurationMultiplier = 4f;
+    [SerializeField] private float noteIncreasePerTransition = 4f;
 
     [Header("Note Types")]
+    [SerializeField] private int newNodesPerTransition = 2;
     [SerializeField] private List<Note> noteTypes = new List<Note>();
 
     [Header("Background Transition Configs")]
@@ -25,6 +28,8 @@ public class GameStatus : MonoBehaviour {
     private float nextTransitionTime;
     private HashSet<Note> allowedNotesForTransition = new HashSet<Note>();
     private bool isDelayed = true;
+    private int currentAllowedNodes;
+    private float currentNoteIntervalDurationMultiplier;
 
     private void Awake() {
         if (!this.isOnlyGameStatusInstance()) {
@@ -42,7 +47,9 @@ public class GameStatus : MonoBehaviour {
         currentTime = 0;
         currentTransitionIndex = 0;
         nextTransitionTime = getNextTransitionTime(currentTransitionIndex);
+        currentAllowedNodes = newNodesPerTransition;
         allowedNotesForTransition = getAllowedNotesForTransition();
+        currentNoteIntervalDurationMultiplier = noteIntervalDurationMultiplier;
 
         StartCoroutine(DelayStart());
     }
@@ -80,10 +87,12 @@ public class GameStatus : MonoBehaviour {
         return spawningTransitionInterval;
     }
 
-    public void setupForNextTransitionBackground() {
-        currentTransitionIndex += 1;
-        nextTransitionTime = getNextTransitionTime(currentTransitionIndex);
-        allowedNotesForTransition = getAllowedNotesForTransition();
+    public float getCurrentNoteIntervalDurationMultiplier() {
+        return currentNoteIntervalDurationMultiplier;
+    }
+
+    public bool gameIsDelayed() {
+        return isDelayed;
     }
 
     public bool noteIsAllowed(Note note) {
@@ -96,8 +105,12 @@ public class GameStatus : MonoBehaviour {
         Destroy(gameObject);
     }
 
-    public bool gameIsDelayed() {
-        return isDelayed;
+    public void setupForNextTransitionBackground() {
+        currentTransitionIndex += 1;
+        nextTransitionTime = getNextTransitionTime(currentTransitionIndex);
+        currentAllowedNodes += newNodesPerTransition;
+        allowedNotesForTransition = getAllowedNotesForTransition();
+        currentNoteIntervalDurationMultiplier += noteIncreasePerTransition;
     }
 
     private bool isOnlyGameStatusInstance() {
@@ -122,7 +135,7 @@ public class GameStatus : MonoBehaviour {
     private HashSet<Note> getAllowedNotesForTransition() {
         HashSet<Note> allowedNotes = new HashSet<Note>();
 
-        for (int index = 0; index <= (currentTransitionIndex + 1); index++) {
+        for (int index = 0; index < currentAllowedNodes; index++) {
             allowedNotes.Add(noteTypes[index]);
         }
 

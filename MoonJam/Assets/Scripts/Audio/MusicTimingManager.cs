@@ -10,7 +10,7 @@ public class MusicTimingManager : MonoBehaviour
     [SerializeField] public int beatsPerMinute = 128;
     [SerializeField] private List<GameObject> lanePrefabs = new List<GameObject>();
     [SerializeField] private List<GameObject> musicCommandPrefabs = new List<GameObject>();
-    [SerializeField] private float noteIntervalDurationMultiplier = 1f;
+    [SerializeField] private float noteIntervalDurationMultiplier = 16f;
     [SerializeField] private float musicDelay = 0.5f;
 
     // public GameObject musicObjectPrefab;
@@ -55,9 +55,10 @@ public class MusicTimingManager : MonoBehaviour
 
             float noteInSeconds = beatLength * musicCommand.GetNoteFraction();
 
-            float intervalTime = noteInSeconds * noteIntervalDurationMultiplier;
+            // float intervalTime =
+            //     noteInSeconds * gameStatus.getCurrentNoteIntervalDurationMultiplier();
 
-            StartCoroutine(ExecuteAfterTime(musicCommand, intervalTime));
+            StartCoroutine(ExecuteAfterTime(musicCommand, noteInSeconds));
         }
 
     }
@@ -74,6 +75,8 @@ public class MusicTimingManager : MonoBehaviour
 
             bool gameIsDelayed = gameStatus.gameIsDelayed();
 
+            float interval = time * gameStatus.getCurrentNoteIntervalDurationMultiplier();
+
             if (gameStatus.shouldTransitionBackground())
             {
                 yield return new WaitForSeconds(gameStatus.getSpawningTransitionInterval());
@@ -84,7 +87,7 @@ public class MusicTimingManager : MonoBehaviour
                     musicCommand.Execute(lanePrefabs);
                 }
 
-                yield return new WaitForSeconds(time);
+                yield return new WaitForSeconds(interval);
             }
 
             playMusic();
