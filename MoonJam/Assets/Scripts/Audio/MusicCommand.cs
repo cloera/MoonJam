@@ -16,9 +16,9 @@ public class MusicCommand : MonoBehaviour
     private float quarterNoteInterval = 0.25f;
     private float eighthNoteInterval = 0.125f;
 
-    public void Execute(List<GameObject> lanePrefabs)
+    public void Execute()
     {
-        GameObject randomLanePrefab = getRandomLanePrefab(lanePrefabs);
+        GameObject randomLanePrefab = MusicTimingManager.getRandomLanePrefab();
 
         Lane randomLane = randomLanePrefab.GetComponent<Lane>();
 
@@ -52,12 +52,5 @@ public class MusicCommand : MonoBehaviour
 
     public Note GetNote() {
         return note;
-    }
-
-    private GameObject getRandomLanePrefab(List<GameObject> lanePrefabs)
-    {
-        int randomIndex = Random.Range(0, lanePrefabs.Count);
-
-        return lanePrefabs[randomIndex];
     }
 }
