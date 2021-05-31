@@ -75,8 +75,7 @@ MonoBehaviour:
   transitionSpeed: 0.2
   spawningTransitionInterval: 4
   transitionTimesInSeconds:
-  - 5
-  - 15
+  - 84
 --- !u!82 &1201123638
 AudioSource:
   m_ObjectHideFlags: 0

@@ -7,6 +7,7 @@ public class BackgroundScroller : MonoBehaviour {
     [SerializeField] private float scrollSpeed = 0.1f;
 
     [Header("Transition Configs")]
+    [SerializeField] private bool transitions = false;
     [SerializeField] private float transitionSpeed = 0.2f;
 
     // Cache
@@ -28,7 +29,9 @@ public class BackgroundScroller : MonoBehaviour {
     // Update is called once per frame
     void Update() {
         if (gameStatus.shouldTransitionBackground()) {
-            scrollTopToBottom();
+            if (transitions) {
+                scrollTopToBottom();
+            }
         } else {
             scrollRightToLeft();
         }
