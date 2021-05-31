@@ -74,7 +74,9 @@ public class GameStatus : MonoBehaviour {
 
             transitionBackground = shouldStartBackgroundTransition();
 
-            audioSource.UnPause();
+            if (!audioSource.isPlaying) {
+                audioSource.UnPause();
+            }
         } else {
             if (audioSource.isPlaying) {
                 audioSource.Pause();
