@@ -143,6 +143,10 @@ PrefabInstance:
       value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 2680837861829289919, guid: db3dabd0fd7c6e74c9c152304f913fe7, type: 3}
+      propertyPath: bossNoteIntervalDurationMultiplier
+      value: 16
+      objectReference: {fileID: 0}
+    - target: {fileID: 2680837861829289919, guid: db3dabd0fd7c6e74c9c152304f913fe7, type: 3}
       propertyPath: transitionTimesInSeconds.Array.size
       value: 1
       objectReference: {fileID: 0}
