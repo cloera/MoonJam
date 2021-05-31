@@ -16,12 +16,14 @@ public class Player : MonoBehaviour {
     // Cache
     private SceneLoader sceneLoader;
     private SpriteRenderer spriteRenderer;
+    private GameStatus gameStatus;
 
 
     // Start is called before the first frame update
     void Start() {
         sceneLoader = FindObjectOfType<SceneLoader>();
         spriteRenderer = getSpriteRenderer();
+        gameStatus = FindObjectOfType<GameStatus>();
 
         setupMoveBoundaries();
     }
@@ -59,7 +61,9 @@ public class Player : MonoBehaviour {
 
         Destroy(gameObject);
 
-        sceneLoader.loadStartMenu();
+        gameStatus.resetGame();
+
+        sceneLoader.loadGameScene();
     }
 
     private void setupMoveBoundaries() {
