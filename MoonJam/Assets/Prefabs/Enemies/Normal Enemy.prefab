@@ -96,6 +96,7 @@ GameObject:
   - component: {fileID: 3451421377613887026}
   - component: {fileID: 442806464896605260}
   - component: {fileID: 5489802931750021805}
+  - component: {fileID: 6124178148345688163}
   m_Layer: 0
   m_Name: Normal Enemy
   m_TagString: Enemy
@@ -246,3 +247,14 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!210 &6124178148345688163
+SortingGroup:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6603520845149567225}
+  m_Enabled: 1
+  m_SortingLayerID: 0
+  m_SortingLayer: 0
+  m_SortingOrder: 0

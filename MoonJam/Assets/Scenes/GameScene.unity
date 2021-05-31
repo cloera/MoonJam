@@ -187,6 +187,14 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 2680837861829289919, guid: db3dabd0fd7c6e74c9c152304f913fe7, type: 3}
+      propertyPath: transitionTimesInSeconds.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2680837861829289919, guid: db3dabd0fd7c6e74c9c152304f913fe7, type: 3}
+      propertyPath: transitionTimesInSeconds.Array.data[0]
+      value: 84
+      objectReference: {fileID: 0}
     - target: {fileID: 7696494362187319411, guid: db3dabd0fd7c6e74c9c152304f913fe7, type: 3}
       propertyPath: m_Name
       value: GameManager
