@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine.Events;
 using UnityEngine;
+using NoteType;
 
 public class MusicTimingManager : MonoBehaviour
 {
@@ -22,6 +23,8 @@ public class MusicTimingManager : MonoBehaviour
     private int barCount;
     private static MusicTimingManager mInstance = null;
     private AudioSource musicPlayer;
+    private GameStatus gameStatus;
+    private float oneSecond = 1f;
 
     private void Awake()
     {
@@ -44,6 +47,7 @@ public class MusicTimingManager : MonoBehaviour
         barLength = beatLength * 4.0f;
         barCount = 0;
         musicPlayer = gameObject.GetComponent<AudioSource>();
+        gameStatus = FindObjectOfType<GameStatus>();
 
         foreach(GameObject musicCommandPrefab in musicCommandPrefabs)
         {
@@ -52,8 +56,6 @@ public class MusicTimingManager : MonoBehaviour
             float noteInSeconds = beatLength * musicCommand.GetNoteFraction();
 
             float intervalTime = noteInSeconds * noteIntervalDurationMultiplier;
-
-            Debug.Log(string.Format("Music Object : {0}, {1}, {2}", musicCommandPrefab.name, noteInSeconds, intervalTime));
 
             StartCoroutine(ExecuteAfterTime(musicCommand, intervalTime));
         }
@@ -64,9 +66,24 @@ public class MusicTimingManager : MonoBehaviour
     {
         while (true)
         {
-            yield return new WaitForSeconds(time);
+            Note musicCommandNote = musicCommand.GetNote();
 
-            musicCommand.Execute(lanePrefabs);
+            bool noteIsAllowed = gameStatus.noteIsAllowed(musicCommandNote);
+
+            bool transitioning = gameStatus.shouldTransitionBackground();
+
+            if (gameStatus.shouldTransitionBackground())
+            {
+                yield return new WaitForSeconds(gameStatus.getSpawningTransitionInterval());
+            } else
+            {
+                if (noteIsAllowed)
+                {
+                    musicCommand.Execute(lanePrefabs);
+                }
+
+                yield return new WaitForSeconds(time);
+            }
 
             playMusic();
         }

@@ -55,4 +55,4 @@ MonoBehaviour:
   - {fileID: 6603520845149567225, guid: b156bc5dfe139424c80d4f4a82ca2ac7, type: 3}
   totalSeconds: 30
   delayBetweenEnemySpawns: 0.5
-  run: 1
+  run: 0
