@@ -11,23 +11,32 @@ public class MusicCommand : MonoBehaviour
     [SerializeField] private Note note;
     [SerializeField] private GameObject enemyPrefab = null;
 
+    public delegate void OnLockSet(LockState lockState, bool state);
+    public static event OnLockSet OnLockSetDelegate;
+    public delegate bool OnLockGet(LockState lockState);
+    public static event OnLockGet OnLockGetDelegate;
+
+    private LockState lockState;
     private float wholeNoteInterval = 1.0f;
     private float halfNoteInterval = 0.5f;
     private float quarterNoteInterval = 0.25f;
     private float eighthNoteInterval = 0.125f;
 
-    public void Execute()
+    public void InitCommand(LockState lockState)
     {
-        GameObject randomLanePrefab = MusicTimingManager.getRandomLanePrefab();
-
-        Lane randomLane = randomLanePrefab.GetComponent<Lane>();
-
-        randomLane.spawnEnemy(enemyPrefab);
+        this.lockState = lockState;
     }
 
-    public GameObject GetEnemy()
+    public void Execute()
     {
-        return enemyPrefab;
+        if(OnLockGetDelegate(lockState))
+        {
+            GameObject randomLanePrefab = MusicTimingManager.getRandomLanePrefab();
+            Lane randomLane = randomLanePrefab.GetComponent<Lane>();
+            randomLane.spawnEnemy(enemyPrefab);
+
+            OnLockSetDelegate(lockState, false);
+        }
     }
 
     public float GetNoteFraction()
@@ -55,7 +64,8 @@ public class MusicCommand : MonoBehaviour
         return time;
     }
 
-    public Note GetNote() {
+    public Note GetNote()
+    {
         return note;
     }
 }

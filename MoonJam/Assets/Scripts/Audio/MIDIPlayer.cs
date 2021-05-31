@@ -8,13 +8,19 @@ using System.Collections.Generic;
 
 public class MIDIPlayer : MonoBehaviour
 {
-    public delegate void OnNotePlayback();
-    public static event OnNotePlayback notePlaybackDelegate;
+    [SerializeField] public string midiFileName;
+
+    public delegate void OnLockSet(LockState lockState, bool state);
+    public static event OnLockSet OnLockSetDelegate;
+
+    private LockState lockState;
     private MidiFile midiFile;
     private Playback playback;
 
-    public void InitPlayer(string midiFileName)
+    public void InitPlayer(LockState lockState)
     {
+        this.lockState = lockState;
+
         string midiFolderPath = Path.Combine("Assets", "Music", "MIDI");
         string midiFilePath = Path.Combine(midiFolderPath, midiFileName);
         midiFile = MidiFile.Read(midiFilePath);
@@ -45,13 +51,11 @@ public class MIDIPlayer : MonoBehaviour
         playback.Stop();
     }
 
-    public int i = 0;
     public NotePlaybackData OnNoteCallback(NotePlaybackData rawNoteData, long rawTime, long rawLength, TimeSpan playbackTime)
     {
-        Debug.Log("note: " + rawNoteData.NoteNumber + "  " + i);
-        i++;
+        Debug.Log("note: " + rawNoteData.NoteNumber);
 
-        notePlaybackDelegate();
+        OnLockSetDelegate(lockState, true);
 
         return rawNoteData;
     }

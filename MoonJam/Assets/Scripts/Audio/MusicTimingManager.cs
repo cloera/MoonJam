@@ -10,6 +10,7 @@ public class MusicTimingManager : MonoBehaviour
     [SerializeField] public int beatsPerMinute = 128;
     [SerializeField] private List<GameObject> lanePrefabs = new List<GameObject>();
     [SerializeField] private List<GameObject> musicCommandPrefabs = new List<GameObject>();
+    [SerializeField] private List<GameObject> midiPrefabs = new List<GameObject>();
     [SerializeField] private float noteIntervalDurationMultiplier = 1f;
     [SerializeField] private float musicDelay = 0.5f;
 
@@ -17,14 +18,16 @@ public class MusicTimingManager : MonoBehaviour
     private float beatsPerSecond;
     private float beatLength;
     private float barLength;
-    //private int barCount;
+    private int barCount;
     private static MusicTimingManager mInstance = null;
     private AudioSource musicPlayer;
     private GameStatus gameStatus;
-    private MIDIPlayer midiPlayer;
-    //private float oneSecond = 1f;
-    public bool hasNoteEvent = false;
-    private Object noteEventLock = new Object();
+
+    private List<LockState> lockStateList = new List<LockState>();
+    private static LockState mainLockState1 = new LockState();
+    private static LockState mainLockState2 = new LockState();
+    private static LockState mainLockState3 = new LockState();
+    private static LockState mainLockState4 = new LockState();
 
     private void Awake()
     {
@@ -37,6 +40,11 @@ public class MusicTimingManager : MonoBehaviour
         {
             Destroy(this);
         }
+
+        lockStateList.Add(mainLockState1);
+        lockStateList.Add(mainLockState2);
+        lockStateList.Add(mainLockState3);
+        lockStateList.Add(mainLockState4);
     }
 
     void Start()
@@ -45,24 +53,26 @@ public class MusicTimingManager : MonoBehaviour
         beatsPerSecond = beatsPerMinute / 60.0f;
         beatLength = 1.0f / beatsPerSecond;
         barLength = beatLength * 4.0f;
-        //barCount = 0;
+
         musicPlayer = gameObject.GetComponent<AudioSource>();
         gameStatus = FindObjectOfType<GameStatus>();
 
-        foreach (GameObject musicCommandPrefab in musicCommandPrefabs)
+        MusicCommand.OnLockSetDelegate += setLockState;
+        MusicCommand.OnLockGetDelegate += getLockState;
+        MIDIPlayer.OnLockSetDelegate += setLockState;
+
+        for(int i = 0; i < midiPrefabs.Count-1; i++)
         {
-            MusicCommand musicCommand = musicCommandPrefab.GetComponent<MusicCommand>();
+            LockState ls = lockStateList[i];
+            
+            MusicCommand command = musicCommandPrefabs[i].GetComponent<MusicCommand>();
+            command.InitCommand(ls);
 
-            float noteInSeconds = beatLength * musicCommand.GetNoteFraction();
+            MIDIPlayer mPlayer = midiPrefabs[i].GetComponent<MIDIPlayer>();
+            mPlayer.InitPlayer(ls);
 
-            float intervalTime = noteInSeconds * noteIntervalDurationMultiplier;
-
-            StartCoroutine(ExecuteAfterTime(musicCommand, intervalTime));
+            StartCoroutine(ExecuteAfterTime(command));
         }
-
-        midiPlayer = this.gameObject.AddComponent<MIDIPlayer>();
-        midiPlayer.InitPlayer("Kick_2_Irrupt.mid");
-        MIDIPlayer.notePlaybackDelegate += noteEventOn;
 
         playMusic();
     }
@@ -70,10 +80,12 @@ public class MusicTimingManager : MonoBehaviour
     private void OnDisable()
     {
         StopMusic();
-        MIDIPlayer.notePlaybackDelegate -= noteEventOn;
+        MIDIPlayer.OnLockSetDelegate -= setLockState;
+        MusicCommand.OnLockSetDelegate -= setLockState;
+        MusicCommand.OnLockGetDelegate -= getLockState;
     }
 
-    IEnumerator ExecuteAfterTime(MusicCommand musicCommand, float time)
+    IEnumerator ExecuteAfterTime(MusicCommand musicCommand)
     {
         while (true)
         {
@@ -87,33 +99,34 @@ public class MusicTimingManager : MonoBehaviour
             }
             else
             {
-                lock(noteEventLock)
+                if (noteIsAllowed)
                 {
-                    if (noteIsAllowed && hasNoteEvent)
-                    {
-                        musicCommand.Execute();
-                        noteEventOff();
-                    }
+                    musicCommand.Execute();
                 }
-                
-
-                yield return new WaitForSeconds(time);
+                yield return null;
             }
             
         }
     }
 
-    public void noteEventOn()
+    public void setLockState(LockState lockState, bool state)
     {
-        lock(noteEventLock)
+        lock(lockState.threadLock)
         {
-            this.hasNoteEvent = true;
+            lockState.state = state;
         }
     }
 
-    public void noteEventOff()
+    public bool getLockState(LockState lockState)
     {
-        this.hasNoteEvent = false;
+        bool state;
+
+        lock(lockState.threadLock)
+        {
+            state = lockState.state;
+        }
+
+        return state;
     }
 
     private void playMusic() 

@@ -207,6 +207,26 @@ PrefabInstance:
       propertyPath: m_Name
       value: GameManager
       objectReference: {fileID: 0}
+    - target: {fileID: 7696494362187319420, guid: db3dabd0fd7c6e74c9c152304f913fe7, type: 3}
+      propertyPath: midiPrefabs.Array.size
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 7696494362187319420, guid: db3dabd0fd7c6e74c9c152304f913fe7, type: 3}
+      propertyPath: midiPrefabs.Array.data[0]
+      value: 
+      objectReference: {fileID: 4836793973405076340, guid: 782d5c6a1b32c264ba138be51434e567, type: 3}
+    - target: {fileID: 7696494362187319420, guid: db3dabd0fd7c6e74c9c152304f913fe7, type: 3}
+      propertyPath: midiPrefabs.Array.data[1]
+      value: 
+      objectReference: {fileID: 3343011085901461669, guid: 9df00ac4f4191914ab63acc2cd5c3094, type: 3}
+    - target: {fileID: 7696494362187319420, guid: db3dabd0fd7c6e74c9c152304f913fe7, type: 3}
+      propertyPath: midiPrefabs.Array.data[2]
+      value: 
+      objectReference: {fileID: 6995190893512040635, guid: f5ef78eada79e614b875dd49666ac71e, type: 3}
+    - target: {fileID: 7696494362187319420, guid: db3dabd0fd7c6e74c9c152304f913fe7, type: 3}
+      propertyPath: midiPrefabs.Array.data[3]
+      value: 
+      objectReference: {fileID: 3638911090538063567, guid: 706c0b3e0bfcec54986f5b983de9ea0d, type: 3}
     - target: {fileID: 7696494362187319421, guid: db3dabd0fd7c6e74c9c152304f913fe7, type: 3}
       propertyPath: m_RootOrder
       value: 3
