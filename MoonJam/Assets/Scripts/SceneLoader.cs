@@ -31,6 +31,10 @@ public class SceneLoader : MonoBehaviour {
         loadScene(nextSceneName);
     }
 
+    public void quitGame() {
+        Application.Quit();
+    }
+
     private void loadScene(string sceneName) {
         StartCoroutine(loadSceneWithDelay(sceneName));
     }
