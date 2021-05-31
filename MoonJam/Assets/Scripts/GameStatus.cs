@@ -16,9 +16,11 @@ public class GameStatus : MonoBehaviour {
 
     [Header("Background Transition Configs")]
     [SerializeField] private float transitionSpeed = 0.2f;
-    [SerializeField] private float spawningTransitionInterval = 2f;
+    [SerializeField] private float spawningTransitionInterval = 3f;
     [SerializeField] private List<float> transitionTimesInSeconds = new List<float>();
 
+    // Cache
+    private AudioSource audioSource = null;
 
     // State
     private int currentScore;
@@ -51,6 +53,8 @@ public class GameStatus : MonoBehaviour {
         allowedNotesForTransition = getAllowedNotesForTransition();
         currentNoteIntervalDurationMultiplier = noteIntervalDurationMultiplier;
 
+        audioSource = getAudioSource();
+
         StartCoroutine(DelayStart());
     }
 
@@ -62,9 +66,20 @@ public class GameStatus : MonoBehaviour {
 
     // Update is called once per frame
     void Update() {
-        currentTime += Time.deltaTime;
+        if (FindObjectOfType<SceneLoader>().isOnGameScene()) {
+            currentTime += Time.deltaTime;
 
-        transitionBackground = shouldStartBackgroundTransition();
+            bool nextTransitionIsLast =
+                (currentTransitionIndex + 1) == transitionTimesInSeconds.Count;
+
+            transitionBackground = shouldStartBackgroundTransition();
+
+            audioSource.UnPause();
+        } else {
+            if (audioSource.isPlaying) {
+                audioSource.Pause();
+            }
+        }
     }
 
     public int getCurrentScore() {
@@ -106,11 +121,16 @@ public class GameStatus : MonoBehaviour {
     }
 
     public void setupForNextTransitionBackground() {
+        currentTime = 0;
         currentTransitionIndex += 1;
         nextTransitionTime = getNextTransitionTime(currentTransitionIndex);
         currentAllowedNodes += newNodesPerTransition;
         allowedNotesForTransition = getAllowedNotesForTransition();
         currentNoteIntervalDurationMultiplier += noteIncreasePerTransition;
+
+        if (currentTransitionIndex == transitionTimesInSeconds.Count) {
+            FindObjectOfType<SceneLoader>().loadNextScene();
+        }
     }
 
     private bool isOnlyGameStatusInstance() {
@@ -136,9 +156,15 @@ public class GameStatus : MonoBehaviour {
         HashSet<Note> allowedNotes = new HashSet<Note>();
 
         for (int index = 0; index < currentAllowedNodes; index++) {
-            allowedNotes.Add(noteTypes[index]);
+            if (index < noteTypes.Count) {
+                allowedNotes.Add(noteTypes[index]);
+            }
         }
 
         return allowedNotes;
+    }
+
+    private AudioSource getAudioSource() {
+        return gameObject.GetComponent<AudioSource>();
     }
 }

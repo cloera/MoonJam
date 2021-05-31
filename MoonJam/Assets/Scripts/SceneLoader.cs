@@ -8,6 +8,10 @@ public class SceneLoader : MonoBehaviour {
     [SerializeField] private float loadSceneDelayInSeconds = 0.5f;
     [SerializeField] private string startMenuSceneName = "Start Menu";
     [SerializeField] private string gameSceneName = "GameScene";
+    [SerializeField] private string bossSceneName = "Boss Scene";
+
+    // Cache
+    private AudioSource musicPlayer;
 
     public void loadStartMenu() {
         GameStatus gameStatus = FindObjectOfType<GameStatus>();
@@ -36,7 +40,10 @@ public class SceneLoader : MonoBehaviour {
     }
 
     public bool isOnGameScene() {
-        return SceneManager.GetActiveScene().name.Equals(gameSceneName);
+        bool isOnMainGameScene = SceneManager.GetActiveScene().name.Equals(gameSceneName);
+        bool isOnBossScene = SceneManager.GetActiveScene().name.Equals(bossSceneName);
+
+        return isOnMainGameScene || isOnBossScene;
     }
 
     private void loadScene(string sceneName) {

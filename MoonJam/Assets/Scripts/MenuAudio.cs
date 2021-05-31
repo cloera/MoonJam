@@ -7,8 +7,7 @@ public class MenuAudio : MonoBehaviour {
     private SceneLoader sceneLoader = null;
     private AudioSource musicPlayer = null;
 
-    // Start is called before the first frame update
-    void Start() {
+    private void Awake() {
         if (!this.isOnlyInstance()) {
             gameObject.SetActive(false);
             Destroy(gameObject);
@@ -18,6 +17,10 @@ public class MenuAudio : MonoBehaviour {
 
         sceneLoader = FindObjectOfType<SceneLoader>();
         musicPlayer = gameObject.GetComponent<AudioSource>();
+    }
+
+    // Start is called before the first frame update
+    void Start() {
     }
 
     // Update is called once per frame

@@ -1,6 +1,6 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!1 &7696494362187319411
+--- !u!1 &95570710564407206
 GameObject:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -8,39 +8,38 @@ GameObject:
   m_PrefabAsset: {fileID: 0}
   serializedVersion: 6
   m_Component:
-  - component: {fileID: 7696494362187319421}
-  - component: {fileID: 7696494362187319420}
-  - component: {fileID: 2680837861829289919}
-  - component: {fileID: 1201123638}
+  - component: {fileID: 95570710564407204}
+  - component: {fileID: 95570710564407207}
+  - component: {fileID: 95570710564407205}
   m_Layer: 0
-  m_Name: GameManager
+  m_Name: MusicTimingManager
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!4 &7696494362187319421
+--- !u!4 &95570710564407204
 Transform:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7696494362187319411}
+  m_GameObject: {fileID: 95570710564407206}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 4.3768134, y: -3.1357977, z: -0.8460544}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &7696494362187319420
+--- !u!114 &95570710564407207
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7696494362187319411}
-  m_Enabled: 0
+  m_GameObject: {fileID: 95570710564407206}
+  m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: a8472b399709e8c47bae7462ca8cba3b, type: 3}
   m_Name: 
@@ -57,38 +56,15 @@ MonoBehaviour:
   - {fileID: 2963092542754767071, guid: 48a36b9adbd5dae499dfeed3c6cee3fe, type: 3}
   - {fileID: 2963092542754767071, guid: 63412bb0128b24449b15e8ff27678f01, type: 3}
   noteIntervalDurationMultiplier: 16
-  musicDelay: 0
---- !u!114 &2680837861829289919
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7696494362187319411}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d35965272608d24418c4fd96a3333508, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  initialScore: 0
-  startDelayInSeconds: 2
-  noteIntervalDurationMultiplier: 4
-  noteIncreasePerTransition: 20
-  newNodesPerTransition: 2
-  noteTypes: 00000000010000000200000003000000
-  transitionSpeed: 0.2
-  spawningTransitionInterval: 4
-  transitionTimesInSeconds:
-  - 5
-  - 5
---- !u!82 &1201123638
+  musicDelay: 0.5
+--- !u!82 &95570710564407205
 AudioSource:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7696494362187319411}
-  m_Enabled: 0
+  m_GameObject: {fileID: 95570710564407206}
+  m_Enabled: 1
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 0}
   m_audioClip: {fileID: 8300000, guid: a385d40e2a9c50341bbb058b8d5d8cf4, type: 3}

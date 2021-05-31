@@ -24,7 +24,7 @@ public class MusicTimingManager : MonoBehaviour
     private static MusicTimingManager mInstance = null;
     private AudioSource musicPlayer;
     private GameStatus gameStatus;
-    private float oneSecond = 1f;
+    private float zeroSeconds = 0f;
 
     private void Awake()
     {
@@ -77,10 +77,15 @@ public class MusicTimingManager : MonoBehaviour
 
             float interval = time * gameStatus.getCurrentNoteIntervalDurationMultiplier();
 
-            if (gameStatus.shouldTransitionBackground())
+            if (!FindObjectOfType<SceneLoader>().isOnGameScene())
+            {
+                yield return new WaitForSeconds(zeroSeconds);
+            }
+            else if (gameStatus.shouldTransitionBackground())
             {
                 yield return new WaitForSeconds(gameStatus.getSpawningTransitionInterval());
-            } else
+            }
+            else
             {
                 if (noteIsAllowed && !gameIsDelayed)
                 {
@@ -90,13 +95,16 @@ public class MusicTimingManager : MonoBehaviour
                 yield return new WaitForSeconds(interval);
             }
 
-            playMusic();
+            if (FindObjectOfType<SceneLoader>().isOnGameScene())
+            {
+                playMusic();
+            }
         }
     }
 
     private void playMusic() {
         if (!musicPlayer.isPlaying) {
-            musicPlayer.PlayDelayed(musicDelay);
+            musicPlayer.UnPause();
         }
     }
 }
