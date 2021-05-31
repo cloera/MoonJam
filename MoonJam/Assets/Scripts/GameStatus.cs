@@ -7,8 +7,10 @@ public class GameStatus : MonoBehaviour {
     [Header("Game Configs")]
     [SerializeField] private int initialScore = 0;
     [SerializeField] private float startDelayInSeconds = 2f;
+    [SerializeField] private float bossNoteIntervalDurationMultiplier = 3f;
     [SerializeField] private float noteIntervalDurationMultiplier = 4f;
     [SerializeField] private float noteIncreasePerTransition = 4f;
+    [SerializeField] private float bossSceneDurationSeconds = 85f;
 
     [Header("Note Types")]
     [SerializeField] private int newNodesPerTransition = 2;
@@ -21,6 +23,7 @@ public class GameStatus : MonoBehaviour {
 
     // Cache
     private AudioSource audioSource = null;
+    private float twoSeconds = 2f;
 
     // State
     private int currentScore;
@@ -55,25 +58,35 @@ public class GameStatus : MonoBehaviour {
 
         audioSource = getAudioSource();
 
-        StartCoroutine(DelayStart());
+        StartCoroutine(Delay(startDelayInSeconds));
     }
 
-    IEnumerator DelayStart() {
-        yield return new WaitForSeconds(startDelayInSeconds);
+    IEnumerator Delay(float seconds) {
+        yield return new WaitForSeconds(seconds);
 
         isDelayed = false;
+    }
+
+    IEnumerator delaySceneLoad(float seconds) {
+        yield return new WaitForSeconds(seconds);
+
     }
 
     // Update is called once per frame
     void Update() {
         if (FindObjectOfType<SceneLoader>().isOnBossScene()) {
-            currentNoteIntervalDurationMultiplier = noteIntervalDurationMultiplier;
+            currentNoteIntervalDurationMultiplier = bossNoteIntervalDurationMultiplier;
+            nextTransitionTime = bossSceneDurationSeconds;
+
+            if (currentTime >= nextTransitionTime + twoSeconds) {
+                FindObjectOfType<SceneLoader>().loadNextScene();
+            }
+        } else if (FindObjectOfType<SceneLoader>().isOnGameScene()) {
+            nextTransitionTime = getNextTransitionTime(currentTransitionIndex);
         }
 
         if (FindObjectOfType<SceneLoader>().isOnGameScene()) {
             currentTime += Time.deltaTime;
-
-            nextTransitionTime = getNextTransitionTime(currentTransitionIndex);
 
             transitionBackground = shouldStartBackgroundTransition();
 
